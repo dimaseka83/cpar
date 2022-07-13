@@ -32,41 +32,6 @@ export default {
     data() {
         return {
             drawer: false,
-            perusahaan: {
-                phone: '+62812-1234-1234',
-                open_day: 'Senin - Jumat',
-                open_hour: '08.00 - 17.00',
-            },
-            menu: [
-            {
-                name: 'Home',
-                link: '/'
-            },
-            {
-                name: 'about us',
-                icon: 'mdi-package',
-                link: '/produk',
-            }, {
-                name: 'our offer',
-                icon: 'mdi-phone',
-                link: '/kontak',
-            }, {
-                name: 'our products',
-                icon: 'mdi-information',
-                link: '/tentang',
-            }, {
-                name: 'quality',
-                icon: 'mdi-information',
-                link: '/tentang',
-            }, {
-                name: 'news',
-                icon: 'mdi-information',
-                link: '/tentang',
-            }, {
-                name: 'contacts',
-                icon: 'mdi-information',
-                link: '/tentang',
-            }]  
         }
     },
     methods: {

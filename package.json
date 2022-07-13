@@ -26,11 +26,12 @@
         "vue-loader": "^15.9.8",
         "vue-router": "^3.5.2",
         "vue-template-compiler": "^2.6.12",
-        "vuetify": "^2.6.4",
+        "vuetify": "^2.6.7",
         "vuex": "^3.6.2"
     },
     "dependencies": {
         "@vitejs/plugin-vue": "^2.3.3",
-        "autoprefixer": "10.4.5"
+        "autoprefixer": "10.4.5",
+        "vue-number-animation": "^1.1.2"
     }
 }
