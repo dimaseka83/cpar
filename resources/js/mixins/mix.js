@@ -6,6 +6,23 @@ export default {
                 open_day: 'Senin - Jumat',
                 open_hour: '08.00 - 17.00',
             },
+            contact: [{
+                icon: 'mdi-phone',
+                text: '+62812-1234-1234',
+            },
+            {
+                icon: 'mdi-email',
+                text: 'mail@mail.com'
+            },
+            {
+                icon: 'mdi-map-marker',
+                text: 'Jl. Kebon Kacang No.1, Jakarta'
+            },
+            {
+                icon: 'mdi-clock-outline',
+                text: 'Mon-Fri: 9:00 - 17:00'
+            }
+            ],
             menu: [
                 {
                     name: 'Home',
@@ -14,27 +31,31 @@ export default {
                 {
                     name: 'about us',
                     icon: 'mdi-package',
-                    link: '/produk',
+                    link: '/about',
                 }, {
                     name: 'our offer',
                     icon: 'mdi-phone',
-                    link: '/kontak',
+                    link: '/our-offer',
                 }, {
                     name: 'our products',
                     icon: 'mdi-information',
-                    link: '/tentang',
+                    link: '/our-products',
                 }, {
                     name: 'quality',
                     icon: 'mdi-information',
-                    link: '/tentang',
+                    link: '/quality',
                 }, {
                     name: 'news',
                     icon: 'mdi-information',
-                    link: '/tentang',
+                    link: '/news',
                 }, {
                     name: 'contacts',
                     icon: 'mdi-information',
-                    link: '/tentang',
+                    link: '/contacts',
+                },{
+                    name: 'laporan',
+                    icon: 'mdi-information',
+                    link: '/laporan',
                 }],
             social_media: [{
                 link: 'https://www.facebook.com/',

@@ -11,7 +11,7 @@
         <v-app-bar color="#54595F" dark >
             <v-app-bar-nav-icon @click="drawer = true" v-show="sm"></v-app-bar-nav-icon>
             <v-toolbar-title class="ml-12">
-                <v-img src="https://agriwell.com/wp-content/uploads/2019/09/aw-logo-header6.png" width="200"></v-img>
+                <v-img :src="'/images/logo.png'" width="100"></v-img>
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn text @click="menuklik(men.link)" v-show="nosm" v-for="(men, i) in menu" :key="'men'+i">{{ men.name }}</v-btn>

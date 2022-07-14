@@ -101,7 +101,7 @@
         <!-- Page 3 -->
         <v-content style="background-image: url(https://agriwell.com/wp-content/uploads/2019/05/services2.png); background-color: #262b2b;">
             <v-container>
-                <v-row class="mt-16">
+                <v-row class="my-16">
                     <v-col>
                         <div v-for="(pg, i) in page4" :key="'page4'+i">
                         <p class="display-3 white--text" v-text="pg.title"></p>
@@ -159,7 +159,7 @@
         <!-- Page 5 -->
         <v-content>
             <v-container>
-                <v-row class="mt-16">
+                <v-row class="my-16">
                     <v-col>
                         <div v-for="(pg, i) in page5" :key="'page5'+i">
                             <p class="display-3">{{ pg.title }}</p>
@@ -208,7 +208,7 @@
         <!-- Page 7 -->
         <v-content>
             <v-container>
-                <v-row class="mt-16" v-if="nosm">
+                <v-row class="my-16" v-if="nosm">
                     <v-col cols="4">
                         <p class="display-3" v-for="(disp, i) in page7" :key="'page7'+ i" v-text="disp.title"></p>
                         <div v-for="(latest, i) in news_latest" :key="'page7_1'+ i">
@@ -238,7 +238,7 @@
                         </v-row>
                     </v-col>
                 </v-row>
-                <v-row class="mt-16" v-if="sm">
+                <v-row class="my-16" v-if="sm">
                     <v-col cols="12">
                         <div v-for="(disp, i) in page7" :key="'page7-1'+ i">
                         <p class="display-3" v-text="disp.title"></p>
@@ -264,14 +264,12 @@
 import Nav from '../components/Nav.vue'
 import Footer from '../components/Footer.vue'
 import mix from '../mixins/mix.js'
-import VueNumber from 'vue-number-animation'
 import Number from '../../../node_modules/vue-number-animation/Number.vue'
 export default {
     mixins: [mix],
     components: {
     Nav,
     Footer,
-    VueNumber,
     Number
 },
     data(){
@@ -334,27 +332,33 @@ export default {
             }],
             services: [{
                 icon: 'mdi-biohazard',
-                title: 'BIO Certification'
+                title: 'BIO Certification',
+                subtitle: 'We provide informational support and we prepare and collect required documents and certificates for organic farming.'
             },
             {
                 icon: 'mdi-barn',
-                title: 'Organic Farming'
+                title: 'Organic Farming',
+                subtitle: 'We provide informational support and we prepare and collect required documents and certificates for organic farming.'
             },
             {
                 icon: 'mdi-warehouse',
-                title: 'Warehousing & Storage'
+                title: 'Warehousing & Storage',
+                subtitle: 'We provide informational support and we prepare and collect required documents and certificates for organic farming.'
             },
             {
                 icon: 'mdi-biohazard',
-                title: 'BIO Certification'
+                title: 'BIO Certification',
+                subtitle: 'We provide informational support and we prepare and collect required documents and certificates for organic farming.'
             },
             {
                 icon: 'mdi-barn',
-                title: 'Organic Farming'
+                title: 'Organic Farming',
+                subtitle: 'We provide informational support and we prepare and collect required documents and certificates for organic farming.'
             },
             {
                 icon: 'mdi-warehouse',
-                title: 'Warehousing & Storage'
+                title: 'Warehousing & Storage',
+                subtitle: 'We provide informational support and we prepare and collect required documents and certificates for organic farming.'
             }],
             progress: [{
                 number: '10',

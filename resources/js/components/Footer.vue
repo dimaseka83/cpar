@@ -3,7 +3,7 @@
         <v-container>
             <v-row class="mt-10">
                 <v-col>
-                    <v-img src="https://agriwell.com/wp-content/uploads/2019/09/aw-logo-footer.png" width="200"></v-img>
+                    <v-img :src="'/images/logo.png'" width="200"></v-img>
                     <p class="white--text">Global exporter of top quality oilseeds, pulses, and grains for human consumption, oil extraction or animal feed. We specialises in organic agriculture. The core assortment consists of organic flax seeds in range of 98-99,95% of purity, as well as poppy, mustard, caraway and other oilseeds.</p>
                 </v-col>
                 <v-col>
@@ -32,26 +32,5 @@
 import mix from '../mixins/mix.js'
 export default {
     mixins: [mix],
-    data() {
-        return {
-            contact: [{
-                icon: 'mdi-phone',
-                text: '+62812-1234-1234',
-            },
-            {
-                icon: 'mdi-email',
-                text: 'mail@mail.com'
-            },
-            {
-                icon: 'mdi-map-marker',
-                text: 'Jl. Kebon Kacang No.1, Jakarta'
-            },
-            {
-                icon: 'mdi-clock-outline',
-                text: 'Mon-Fri: 9:00 - 17:00'
-            }
-            ]
-        }
-    },
 }
 </script>
