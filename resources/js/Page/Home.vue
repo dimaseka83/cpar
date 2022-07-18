@@ -250,9 +250,9 @@
                         <p class="font-weight-black text-h4 mt-5">{{ nw.title }}</p>
                         <p class="font-weight-thin title">{{ nw.date }} | {{ nw.category_news }}</p>
                         <p class="subtitle">{{ nw.subtitle }}</p>
-                        <a class="text-decoration-underline font-weight-bold text-uppercase green--text" href="#">
+                        <!-- <a class="text-decoration-underline font-weight-bold text-uppercase green--text" href="#">
                             Read More <v-icon color="green">mdi-arrow-right</v-icon>
-                        </a>
+                        </a> -->
                     </v-col>
                 </v-row>
             </v-container>
