@@ -15,8 +15,6 @@ Vue.use(Vuetify);
 Vue.use(Vuex);
 
 const store = new Vuex.Store(Store);
-
-
 window.onload = function () {
     const app = new Vue({
         el: '#app',
@@ -26,8 +24,8 @@ window.onload = function () {
         components: {
             "index": Index
         },
-        // beforeCreate(){
-        //     this.$store.dispatch('loadStoredState');
-        // }
+        beforeCreate(){
+            this.$store.dispatch('loadStoredState');
+        }
     }); 
 }

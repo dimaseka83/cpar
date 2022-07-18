@@ -1,10 +1,16 @@
 <template>
     <v-app>
-        <Nav/>
+        <v-container fluid class="fill-height" v-if="loading">
+          <v-row align="center" justify="center">
+            <v-progress-circular indeterminate color="primary"></v-progress-circular>
+          </v-row>
+        </v-container>
+        <div v-else>
+                    <Nav/>
         <!-- Page 1 -->
         <v-carousel :continuous="false" cycle :show-arrows="false" :height="height" hide-delimiter-background delimiter-icon="mdi-minus">
         <v-carousel-item v-for="(p, i) in slides" :key="'car1'+i">
-                <v-img :height="height" :src="p.image">
+                <v-img :height="height" :src="'./images/home/slides/'+p.image">
                     <v-container v-show="nosm">
                         <v-row>
                             <v-col>
@@ -25,10 +31,10 @@
                     <v-row >
                         <v-col md="12">
                             <p class="font-weight-black text-uppercase display-1 text-center white--text">
-                                    {{ p.title }}
+                                    {{ page2.title }}
                                 </p>
                                 <p class="body-1 text-uppercase white--text text-center">
-                                    {{ p.subtitle }}
+                                    {{ page2.subtitle }}
                                 </p>
                             <div class="d-flex justify-center">
                                 <v-btn color="white" large class="text-uppercase">learn more</v-btn>
@@ -45,7 +51,7 @@
             <v-container>
             <div class="d-flex justify-center" v-show="nosm">
                 <v-card v-for="(img, idx) in images_slides" :key="'imgslide'+idx" class="mx-6 mt-n16" v-show="nosm">
-                    <v-img :src="img.image" max-width="250"></v-img>
+                    <v-img :src="'./images/home/images_slides/'+img.image" max-width="250"></v-img>
                 </v-card>
             </div>       
                 <v-row v-if="nosm">
@@ -258,6 +264,7 @@
             </v-container>
         </v-content>
         <Footer/>
+        </div>
     </v-app>
 </template>
 <script>
@@ -274,187 +281,93 @@ export default {
 },
     data(){
         return {
-            slides: [{
-                image: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-                title: 'new corp 2021',
-                subtitle: 'stay tuned for our organic crop 2021 growth online'
-            },
-            {
-                image: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-                title: 'new corp 2021',
-                subtitle: 'stay tuned for our organic crop 2021 growth online'
-            },
-            {
-                image: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-                title: 'new corp 2021',
-                subtitle: 'stay tuned for our organic crop 2021 growth online'
-            }
-            ],
-            images_slides: [{
-                image: 'https://images.unsplash.com/photo-1601995163168-0894a017d6d1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
-            },
-            {
-                image: 'https://images.unsplash.com/photo-1601995163168-0894a017d6d1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
-            },
-            {
-                image: 'https://images.unsplash.com/photo-1601995163168-0894a017d6d1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
-            }],
-            page2: {
-                title: 'European expert in organic agriculture',
-                subtitle: 'We are a global exporter of top-quality oilseeds, pulses, and grains for human consumption, oil extraction, or animal feed. We specialise in organic agriculture. The core of our offer consists of organic flax seeds in the range of 98–99.99% purity, as well as poppy, mustard, caraway, and other oilseeds. Since 2015 our offer has included dried fruit such as apricots, mulberries, rose hips, and raisins. Most of our goods originate from the Czech Republic, Eastern Europe, and Central Asia.'
-            },
-            page3: [{
-                image: 'https://agriwell.com/wp-content/uploads/2020/05/home-farmers.png',
-                title: 'Our Core Approach',
-                subtitle: 'We help farmers switch from conventional farming to organic farming.'
-            }],
-            sub_page3: [{
-                icon: 'mdi-hat-fedora',
-                title: 'Organic Consulting',
-                subtitle: 'We help farmers switch from conventional farming to organic farming.'
-            },{
-                icon: 'mdi-hat-fedora',
-                title: 'Organic Consulting',
-                subtitle: 'We help farmers switch from conventional farming to organic farming.'
-            },{
-                icon: 'mdi-hat-fedora',
-                title: 'Organic Consulting',
-                subtitle: 'We help farmers switch from conventional farming to organic farming.'
-            },{
-                icon: 'mdi-hat-fedora',
-                title: 'Organic Consulting',
-                subtitle: 'We help farmers switch from conventional farming to organic farming.'
-            }],
-            page4: [{
-                title: 'Our Main Services',
-                subtitle1: 'We produce, ship, supply, and trade first-class certified organic raw materials and processed goods for the international food and animal feed industries.',
-                subtitle2: 'Our know-how in the organic sector comes from more than decade of experience, structured supply methods, and our worldwide operations.'
-            }],
-            services: [{
-                icon: 'mdi-biohazard',
-                title: 'BIO Certification',
-                subtitle: 'We provide informational support and we prepare and collect required documents and certificates for organic farming.'
-            },
-            {
-                icon: 'mdi-barn',
-                title: 'Organic Farming',
-                subtitle: 'We provide informational support and we prepare and collect required documents and certificates for organic farming.'
-            },
-            {
-                icon: 'mdi-warehouse',
-                title: 'Warehousing & Storage',
-                subtitle: 'We provide informational support and we prepare and collect required documents and certificates for organic farming.'
-            },
-            {
-                icon: 'mdi-biohazard',
-                title: 'BIO Certification',
-                subtitle: 'We provide informational support and we prepare and collect required documents and certificates for organic farming.'
-            },
-            {
-                icon: 'mdi-barn',
-                title: 'Organic Farming',
-                subtitle: 'We provide informational support and we prepare and collect required documents and certificates for organic farming.'
-            },
-            {
-                icon: 'mdi-warehouse',
-                title: 'Warehousing & Storage',
-                subtitle: 'We provide informational support and we prepare and collect required documents and certificates for organic farming.'
-            }],
-            progress: [{
-                number: '10',
-                title: 'Over 10 Years on the Market',
-                subtitle: 'We have been exporting and importing agricultural goods in the EU for over a decade.'
-            },{
-                number: '26',
-                title: 'Over 26.000 Tonnes of Goods',
-                subtitle: 'We imported over 26.000 tonnes of goods to the EU from CIS countries in the 2019–2020 harvest year.'
-            },{
-                number: '54',
-                title: 'Over 54.000 Hectares of Land',
-                subtitle: 'We use vast amounts of land for growing organic cultures in conjunction with our farmers.'
-            },{
-                number: '20',
-                title: 'Over 20 Farms in Our Group',
-                subtitle: 'Farms in 6 countries participate in our projects.'
-            }],
-            page5: [{
-                title: 'Work With Us',
-                subtitle: 'We actively seek out new projects, regions, and producers for organic farming.'
-            }],
-            sub_page5: [{
-                icon: 'mdi-hat-fedora',
-                title: '01. Contact us at a convenient time for you.',
-                subtitle: 'Get in touch with us via email or phone, or visit our office to have a cup of organic tea. Our team speaks English, Czech, Slovak, Polish, Ukrainian, and Russian.'
-            },{
-                icon: 'mdi-hat-fedora',
-                title: '02. Present your needs, ideas or thoughts.',
-                subtitle: 'Our experts are looking forward to hearing and discussing your projects.'
-            },
-            {
-                icon: 'mdi-hat-fedora',
-                title: '01. Contact us at a convenient time for you.',
-                subtitle: 'Get in touch with us via email or phone, or visit our office to have a cup of organic tea. Our team speaks English, Czech, Slovak, Polish, Ukrainian, and Russian.'
-            }],
-            page6: [{
-                title : 'What People Say'
-            }],
-            sub_page6: [{
-                image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
-                title: '“Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia quisquam ipsa reiciendis amet quas, vel quam dolorum omnis vitae quia fugiat a dolore, corrupti consectetur, reprehenderit nemo doloremque quis accusantium.”',
-                people_name: 'John Doe',
-                people_position: 'CEO'
-            },{
-                image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
-                title: '“Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia quisquam ipsa reiciendis amet quas, vel quam dolorum omnis vitae quia fugiat a dolore, corrupti consectetur, reprehenderit nemo doloremque quis accusantium.”',
-                people_name: 'John Doe',
-                people_position: 'CEO'
-            },{
-                image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
-                title: '“Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia quisquam ipsa reiciendis amet quas, vel quam dolorum omnis vitae quia fugiat a dolore, corrupti consectetur, reprehenderit nemo doloremque quis accusantium.”',
-                people_name: 'John Doe',
-                people_position: 'CEO'
-            }],
-            page7: [{
-                title: 'Latest News',
-                subtitle: 'The latest news from our company, as well as all the most interesting world news and trends in organic farming and biodynamics.'
-            }],
-            news: [{
-                number: 1,
-                image: "https://agriwell.com/wp-content/uploads/2020/09/sunflower-header-1-1170x238.png",
-                date: '2020-09-01',
-                category_news: 'News',
-                title: 'The latest news from our company',
-                subtitle: 'The latest news from our company, as well as all the most interesting world news and trends in organic farming and biodynamics.',
-            },{
-                number: 2,
-                image: "https://agriwell.com/wp-content/uploads/2020/09/sunflower-header-1-1170x238.png",
-                date: '2020-09-01',
-                category_news: 'News',
-                title: 'The latest news from our company',
-                subtitle: 'The latest news from our company, as well as all the most interesting world news and trends in organic farming and biodynamics.',
-            },{
-                number: 3,
-                image: "https://agriwell.com/wp-content/uploads/2020/09/sunflower-header-1-1170x238.png",
-                date: '2020-09-01',
-                category_news: 'News',
-                title: 'The latest news from our company',
-                subtitle: 'The latest news from our company, as well as all the most interesting world news and trends in organic farming and biodynamics.',
-            }]
+            loading: true,
+            slides: [],
+            images_slides: [],
+            page2: '',
+            page3: [],
+            sub_page3: [],
+            page4: [],
+            services: [],
+            progress: [],
+            page5: [],
+            sub_page5: [],
+            page6: [],
+            sub_page6: [],
+            page7: [],
+            news: []
         }
     },
     methods: {
+        async loadData(){
+            try {
+                this.loading = true
+                await axios.get('/api/home/slides').then(res => {
+                    this.slides = res.data
+                })
+                await axios.get('/api/home/images_slides').then(res => {
+                    this.images_slides = res.data
+                })
+                await axios.get('/api/home/page2').then(res => {
+                    this.page2 = res.data
+                })
+                await axios.get('/api/home/page3').then(res => {
+                    this.page3 = res.data
+                })
+                await axios.get('/api/home/sub_page3').then(res => {
+                    this.sub_page3 = res.data
+                })
+                await axios.get('/api/home/page4').then(res => {
+                    this.page4 = res.data
+                })
+                await axios.get('/api/home/services').then(res => {
+                    this.services = res.data
+                })
+                await axios.get('/api/home/progress').then(res => {
+                    this.progress = res.data
+                })
+                await axios.get('/api/home/page5').then(res => {
+                    this.page5 = res.data
+                })
+                await axios.get('/api/home/sub_page5').then(res => {
+                    this.sub_page5 = res.data
+                })
+                await axios.get('/api/home/page6').then(res => {
+                    this.page6 = res.data
+                })
+                await axios.get('/api/home/sub_page6').then(res => {
+                    this.sub_page6 = res.data
+                })
+                await axios.get('/api/home/page7').then(res => {
+                    this.page7 = res.data
+                })
+                await axios.get('/api/home/news').then(res => {
+                    this.news = res.data
+                })
+                this.loading = false
+            } catch (error) {
+                console.log(error)
+            }
+        },
         row(i){
             if(i % 2 == 1){
                 return 'text-end'
             }
         }
     },
+    mounted(){
+        this.loadData()
+    },
     computed: {
         news_latest(){
-            return this.news.filter(item => item.number == 1)
+            if (this.news.length > 0) {
+                return this.news.filter(item => item.number == 1)
+            }
         },
         news_latest_2(){
-            return this.news.filter(item => item.number != 1)
+            if (this.news.length > 0) {
+                return this.news.filter(item => item.number != 1)
+            }
         }
     }
 }
