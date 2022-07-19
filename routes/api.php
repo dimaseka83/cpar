@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AboutController;
 use App\Http\Controllers\Api\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,4 +41,15 @@ Route::prefix('/home')->group(function ()
     Route::get('/sub_page6', [HomeController::class, 'getSubpage6']);
     Route::get('/page7', [HomeController::class, 'getPage7']);
     Route::get('/news', [HomeController::class, 'getNews']);
+});
+
+// about
+Route::prefix('/about')->group(function ()
+{
+    Route::get('/mission', [AboutController::class, 'getMission']);
+    Route::get('/products', [AboutController::class, 'getProducts']);
+    Route::get('/percentage_products', [AboutController::class, 'getPercentageProducts']);
+    Route::get('/team', [AboutController::class, 'getTeam']);
+    Route::get('/team_details', [AboutController::class, 'getTeamDetails']);
+    Route::get('/about_ceo', [AboutController::class, 'getAboutCeo']);
 });
