@@ -27,8 +27,10 @@
         <v-content class="bg-image" style="background-image: url(https://livewp.site/wp/md/agrosector/wp-content/uploads/sites/55/2019/02/Services_02.png); background-color: #262b2b;">
             <v-container class="my-16 white--text text-center">
                 <v-row class="justify-center">
-                    <p class="display-3 text-uppercase">{{ offer.title }}</p> 
-                    <p class="title font-weight-light grey--text">{{ offer.subtitle }}</p>
+                    <div v-for="(offr, i) in offer" :key="'offer'+i">
+                        <p class="display-3 text-uppercase">{{ offr.title }}</p> 
+                        <p class="title font-weight-light grey--text">{{ offr.subtitle }}</p>
+                    </div>
                 </v-row>
                 <v-row>
                     <v-col :cols="nosm ? '4' : '12'" v-for="(prd, i) in offer_prd" :key="'offer_prd'+i">
@@ -41,9 +43,18 @@
                 </v-row>
                 <p class="text-h5 font-weight-light mt-5">{{ offer_penawaran.title }}</p>
                 <p class="subtitle font-weight-light grey--text">{{ offer_penawaran.subtitle }}</p>
-                <div class="d-flex justify-center">
+                <div class="d-flex justify-center" v-if="nosm">
                     <v-btn class="mr-10" x-large color="green" dark>i want to purchase</v-btn>
                     <v-btn x-large color="green" dark>i want to sell</v-btn>
+                </div>
+                <div v-else >
+
+                        <div class="d-flex justify-center">
+                        <v-btn class="mr-10" x-large color="green" dark>i want to purchase</v-btn>
+                        </div>
+                        <div class="d-flex justify-center">
+                        <v-btn class="mt-5" x-large color="green" dark>i want to sell</v-btn>
+                        </div>
                 </div>
             </v-container>
         </v-content>
@@ -51,8 +62,10 @@
         <v-content>
             <v-container class="my-16">
                 <v-row class="justify-center text-center">
-                    <p class="display-3 text-uppercase">{{ page3.title }}</p> 
-                    <p class="title font-weight-light grey--text">{{ page3.subtitle }}</p>
+                    <div v-for="(pg3, i) in page3" :key="'page3'+i">
+                    <p class="display-3 text-uppercase">{{ pg3.title }}</p> 
+                    <p class="title font-weight-light grey--text">{{ pg3.subtitle }}</p>
+                    </div>
                 </v-row>
                 <v-row>
                     <v-col>
@@ -86,8 +99,10 @@
         <v-content class="bg-image" style="background-image: url(https://livewp.site/wp/md/agrosector/wp-content/uploads/sites/55/2019/02/Work.png); background-color: #262b2b;">
             <v-container class="my-16 white--text">
                 <v-row class="justify-center text-center">
-                    <p class="display-3 text-uppercase ">{{ page4.title }}</p> 
-                    <p class="title font-weight-light grey--text">{{ page4.subtitle }}</p>
+                    <div v-for="(pg4, i) in page4" :key="'page4'+i">
+                    <p class="display-3 text-uppercase ">{{ pg4.title }}</p> 
+                    <p class="title font-weight-light grey--text">{{ pg4.subtitle }}</p>
+                    </div>
                 </v-row>
                 <div :class="nosm ? 'd-flex flex-wrap-reverse' : ''" v-if="nosm">
             <v-card class="rounded-circle mt-16 mx-auto transition-swing success" height="100" width="100" v-for="(prg, idx) in sub_page5" :key="'prg'+idx" >
@@ -126,8 +141,10 @@
                     <v-col>
                         <v-row>
                             <v-col cols="12">
-                                <p class="font-weight-bold display-3">{{ page6.title }}</p>
-                                <p class="font-weight-light text-h5 grey--text mt-10">{{ page6.subtitle }}</p>
+                                <div v-for="(pg6, i) in page6" :key="'page6'+i">
+                                    <p class="font-weight-bold display-3">{{ pg6.title }}</p>
+                                    <p class="font-weight-light text-h5 grey--text mt-10">{{ pg6.subtitle }}</p>
+                                </div>
                             </v-col>
                             <v-col :cols="nosm ? '6' : '12'" v-for="(prg, idx) in subpage6" :key="'subpage6'+idx">
                                 <number :from="0" :to="prg.number" :duration="2" easing="Power1.easeOut" class="mt-10 display-3 green--text"/>
