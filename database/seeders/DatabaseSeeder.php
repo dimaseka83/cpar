@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             AboutSeeder::class,
             OfferSeeder::class,
             QualitySeeder::class,
+            ContactSeeder::class,
         ]);
     }
 }

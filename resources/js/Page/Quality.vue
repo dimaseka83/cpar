@@ -151,10 +151,7 @@ export default {
             ourcertifications: [],
             certification_logo: [],
             certification: [],
-            strictpage: {
-                title: 'STRICT SUPERVISION',
-                subtitle: 'Confirmation of our goods’ organic status is under strict supervision, based on samples that are analysed in accredited European laboratories prior export approval.'
-            },
+            strictpage: [],
             strict_logo: [],
             headqc:[],
             heademail: []

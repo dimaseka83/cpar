@@ -105,7 +105,7 @@
                     </v-row>
                     </v-col>
                 </v-row>
-                <v-card class="mb-n16">
+                <v-card>
                     <div class="mx-16 pt-16">
                     <v-card-title class="display-3">{{ contact_title.title }}</v-card-title>
                     <v-card-text class="title grey--text pt-5">{{ contact_title.text }}</v-card-text>
@@ -123,7 +123,6 @@
                 </v-card>
             </v-container>
         </v-content>
-        <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1041738.169561381!2d111.95913372497157!3d-7.742517963791048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fbc5a8e9e93f%3A0xd850492b876179fd!2sMaxima%20Flora%20(d%2Fh%20WKF%20Surabaya)!5e0!3m2!1sen!2sid!4v1658119160141!5m2!1sen!2sid" width="100%" :height="height" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         <Footer/>
     </v-app>
 </template>
@@ -139,6 +138,7 @@ export default {
     },
     data() {
         return {
+            loading: true,
             items: [
                  {
                 text: 'Home',
@@ -151,53 +151,66 @@ export default {
                 href: '/contacts',
                 },
             ],
-            officeinf: {
-                title: 'Prague Office',
-                title_addr: 'Address',
-                office_name: 'AGRIWELL s.r.o',
-                addr: 'Plzeňská 3351/19, 150 00 Prague, Czech Republic',
-                phone_title: 'Phone'
-            },
-            companyinf: {
-                title: 'Company Info',
-                title_reg: 'Registration Number',
-                title_vat: 'VAT Number',
-                title_databox: 'Data Box ID',
-                title_additional: 'Additional Info',
-            },
-            billinginf: {
-                title: 'Billing Info',
-                title_bank : 'Bank',
-            },
-            registration: 'CZ0990099',
-            vat: [{
-                title: '(CzechRepublic)',
-                text: 'CZ0990099',
-            },{
-                title: '(Poland)',
-                text: 'PL5263189150',
-            }],
-            databox: 'kp2jtnj',
-            additional: 'AGRIWELL s.r.o. is registered on 17.4.2009 in the Commercial Register with the Municipal Court in Prague, section C, insert 150860.',
-            phone: [{
-                number: '+420 774 774 774',
-                title: 'Quality',
-            },{
-                number: '+420 774 774 774',
-                title: 'Purchase',
-            },{
-                number: '+420 774 774 774',
-                title: 'Sales',
-            },{
-                number: '+420 774 774 774',
-                title: 'Logistics',
-            }],
-            name_bank: 'Československá obchodní banka, a.s. Radlická 333/150, 150 57 Prague, Czech Republic',
-            contact_title: {
-                title : 'Contact Us',
-                text: 'We respect your privacy and do not to tolerate spam. Therefore we will never sell, rent, lease, or give away your information. We will use your contact information only to contact you. The information will not be used for other purposes. For more information, review our privacy policy.',
-            },
+            officeinf: [],
+            companyinf: [],
+            billinginf: [],
+            registration: [],
+            vat: [],
+            databox: [],
+            additional: [],
+            phone: [],
+            name_bank: [],
+            contact_title: [],
         }
+    },
+    methods: {
+        async loadData(){
+            await axios.get('/api/contacts/officeinf', function(response){
+                this.officeinf = response.data;
+            });
+
+            await axios.get('/api/contacts/companyinf', function(response){
+                this.companyinf = response.data;
+            });
+
+            await axios.get('/api/contacts/billinginf', function(response){
+                this.billinginf = response.data;
+            });
+
+            await axios.get('/api/contacts/registration', function(response){
+                this.registration = response.data;
+            });
+
+            await axios.get('/api/contacts/vat', function(response){
+                this.vat = response.data;
+            });
+
+            await axios.get('/api/contacts/databox', function(response){
+                this.databox = response.data;
+            });
+
+            await axios.get('/api/contacts/additional', function(response){
+                this.additional = response.data;
+            });
+
+            await axios.get('/api/contacts/phone', function(response){
+                this.phone = response.data;
+            });
+
+            await axios.get('/api/contacts/name_bank', function(response){
+                this.name_bank = response.data;
+            });
+
+            await axios.get('/api/contacts/contact_title', function(response){
+                this.contact_title = response.data;
+            });
+
+            this.loading = false;
+        }
+    },
+
+    mounted() {
+        this.loadData();
     },
 }
 </script>

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\AboutController;
+use App\Http\Controllers\Api\ContactsController;
 use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\QualityController;
 
@@ -82,4 +83,20 @@ Route::prefix('/quality')->group(function ()
     Route::get('/strict_logo', [QualityController::class, 'getStrictLogo']);
     Route::get('/headqc', [QualityController::class, 'getHeadQc']);
     Route::get('/heademail', [QualityController::class, 'getHeadEmail']);
+});
+
+// Contacts
+Route::prefix('/contacts')->group(function ()
+{
+    Route::get('/officeinf', [ContactsController::class, 'getOfficeInf']);
+    Route::get('/companyinf', [ContactsController::class, 'getCompanyInf']);
+    Route::get('/billinginf', [ContactsController::class, 'getBillingInf']);
+    Route::get('/registration', [ContactsController::class, 'getRegistration']);
+    Route::get('/vat', [ContactsController::class, 'getVat']);
+    Route::get('/databox', [ContactsController::class, 'getDatabox']);
+    Route::get('/additional', [ContactsController::class, 'getAdditional']);
+    Route::get('/phone', [ContactsController::class, 'getPhone']);
+    Route::get('/name_bank', [ContactsController::class, 'getNameBank']);
+    Route::get('/contact_title', [ContactsController::class, 'getContactTitle']);
+    
 });
