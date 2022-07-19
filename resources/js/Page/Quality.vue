@@ -1,6 +1,12 @@
 <template>
     <v-app>
-        <Nav/>
+                <v-container fluid class="fill-height" v-if="loading">
+            <v-row align="center" justify="center">
+                <v-progress-circular indeterminate color="primary"></v-progress-circular>
+            </v-row>
+        </v-container>
+        <div v-else>
+            <Nav/>
         <!-- Page 1 -->
         <v-content class="bg-image" style="background-image: url(https://agriwell.com/wp-content/uploads/2019/05/brown-field-header.png);">
             <v-container class="fill-height py-16">
@@ -23,12 +29,14 @@
                 <v-row>
                     <v-col :cols="nosm ? '6' : '12'">
                         <div align="center">
-                            <v-img width="200" v-for="(img_par, i) in partner_logo" :key="'img_par'+i" :src="img_par.image" class="mb-16"></v-img>
+                            <v-img width="200" v-for="(img_par, i) in partner_logo" :key="'img_par'+i" :src="'./images/quality/partner_logo/'+img_par.image" class="mb-16"></v-img>
                         </div>
                     </v-col>
                     <v-col :cols="nosm ? '6' : '12'">
-                        <p class="title white--text">{{ our_social.title }}</p>
-                        <p  class="subtitle grey--text">{{ our_social.subtitle }}</p>
+                    <div v-for="(ors, i) in our_social" :key="'our_social'+i">
+                        <p class="title white--text">{{ ors.title }}</p>
+                        <p  class="subtitle grey--text">{{ ors.subtitle }}</p>
+                    </div>
                     </v-col>
                 </v-row>
             </v-container>
@@ -36,14 +44,14 @@
         <!-- Page 2 -->
         <v-content>
             <v-container class="my-16">
-                <div align="center">
-                    <p class="display-1 text-uppercase">{{ ourcertifications.title }}</p> 
-                    <p class="title font-weight-light grey--text">{{ ourcertifications.subtitle }}</p>
+                <div align="center" v-for="(orc, i) in ourcertifications" :key="'ourcertifications'+i">
+                    <p class="display-1 text-uppercase">{{ orc.title }}</p> 
+                    <p class="title font-weight-light grey--text">{{ orc.subtitle }}</p>
                 </div>
                 <v-row>
                     <v-col :cols="nosm ? '4' : '12'" v-for="(cr, i) in certification_logo" :key="'certification_logo'+i">
                         <div class="d-flex justify-center">
-                            <v-img max-width="300" :src="cr.image"></v-img>
+                            <v-img max-width="300" :src="'./images/quality/certification_logo/'+cr.image"></v-img>
                         </div>
                     </v-col>
                 </v-row>
@@ -55,7 +63,7 @@
                 <v-row>
                     <v-col :cols="nosm ? '3' : '12'" v-for="(cr, i) in certification" :key="'certification'+i">
                         <div class="d-flex justify-center">
-                            <v-img max-width="200" :src="cr.image"></v-img>
+                            <v-img max-width="200" :src="'./images/quality/certification/'+cr.image"></v-img>
                         </div>
                         <p class="font-weight-bold mt-10">{{ cr.title }}</p>
                         <p class="title grey--text mt-5">{{ cr.subtitle }}</p>
@@ -66,9 +74,9 @@
         <!-- Page 4 -->
         <v-content>
             <v-container class="my-16">
-                <div align="center">
-                    <p class="display-1 text-uppercase">{{ strictpage.title }}</p> 
-                    <p class="title font-weight-light grey--text">{{ strictpage.subtitle }}</p>
+                <div align="center" v-for="(str, i) in strictpage" :key="'strictpage'+i">
+                    <p class="display-1 text-uppercase">{{ str.title }}</p> 
+                    <p class="title font-weight-light grey--text">{{ str.subtitle }}</p>
                 </div>
                 <v-row>
                     <v-col :cols="nosm ? '3' : '12'" v-for="(cr, i) in strict_logo" :key="'certification_logo'+i">
@@ -84,17 +92,19 @@
             <v-container class="my-16">
                 <v-row>
                     <v-col cols="4">
-                        <v-card class="text-center" width="400">
-                    <v-img :src="headqc.image"></v-img>
+                        <v-card class="text-center" width="400" v-for="(hdqc, i) in headqc" :key="'headqc'+i">
+                    <v-img :src="'./images/quality/headqc/'+hdqc.image"></v-img>
                     <v-card-text >
-                        <p class="title font-weight-bold ">{{ headqc.name }}</p>
-                        <p class="subtitle">{{ headqc.title }}</p>
+                        <p class="title font-weight-bold ">{{ hdqc.name }}</p>
+                        <p class="subtitle">{{ hdqc.title }}</p>
                     </v-card-text>
                 </v-card>
                     </v-col>
                     <v-col>
-                        <p class="text-h5" v-text="heademail.title"></p>
-                        <p class="grey--text" v-text="heademail.subtitle"></p>
+                        <div v-for="(hdem, i) in heademail" :key="'heademail'+i">
+                        <p class="text-h5" v-text="hdem.title"></p>
+                        <p class="grey--text" v-text="hdem.subtitle"></p>
+                        </div>
                         <v-row>
                             <v-col><v-text-field required label="Nama"></v-text-field></v-col>
                             <v-col><v-text-field required label="Email"></v-text-field></v-col>
@@ -108,6 +118,7 @@
             </v-container>
         </v-content>
         <Footer/>
+        </div>
     </v-app>
 </template>
 <script>
@@ -122,6 +133,7 @@ export default {
     },
      data() {
         return {
+            loading: true,
             items: [
                 {
                 text: 'Home',
@@ -134,66 +146,64 @@ export default {
                 href: '/quality',
                 },
             ],
-            partner_logo: [{
-                image: 'https://agriwell.com/wp-content/uploads/2019/10/SMETA-Ver6.0-300x300-150x150.png'
-            },{
-                image: 'https://agriwell.com/wp-content/uploads/2019/10/SMETA-Ver6.0-300x300-150x150.png'
-            }],
-            our_social:{
-                title: 'OUR SOCIAL & ETHICAL RESPONSIBILITY',
-                subtitle: 'Our company complies with the four pillars of SMETA 6.0. Our audits encompass all the aspects of responsible business practices created by the Sedex Stakeholder Forum. SMETA (Sedex Members Ethical Trade Report) is an audit procedure that is a compilation of good practice in ethical audit techniques. It provides a globally-recognised way to assess responsible supply chain activities and is based on four pillars. Sedex (the Supplier Ethical Data Exchange) is a not-for-profit membership organisation that leads work with buyers and suppliers to deliver improvements in responsible and ethical business practices in global supply chains.'
-            },
-            ourcertifications: {
-                title: 'OUR ORGANIC CERTIFICATIONS',
-                subtitle: 'We are certified by the following bodies:'
-            },
-            certification_logo: [{
-                image: 'https://agriwell.com/wp-content/uploads/2019/09/abcert.png'
-            },{
-                image: 'https://agriwell.com/wp-content/uploads/2019/09/abcert.png'
-            },{
-                image: 'https://agriwell.com/wp-content/uploads/2019/09/abcert.png'
-            }],
-            certification: [{
-                image: 'https://agriwell.com/wp-content/uploads/2019/06/eu-bio-thumb-1.png',
-                title: 'EU BIO-CERTIFICATION',
-                subtitle: 'The European Union has a strict set of requirements for the production of organic foodstuffs. This certification is a means of ensuring that the foodstuffs produced comply with these requirements.'
-            },{
-                image: 'https://agriwell.com/wp-content/uploads/2019/06/eu-bio-thumb-1.png',
-                title: 'EU BIO-CERTIFICATION',
-                subtitle: 'The European Union has a strict set of requirements for the production of organic foodstuffs. This certification is a means of ensuring that the foodstuffs produced comply with these requirements.'
-            },{
-                image: 'https://agriwell.com/wp-content/uploads/2019/06/eu-bio-thumb-1.png',
-                title: 'EU BIO-CERTIFICATION',
-                subtitle: 'The European Union has a strict set of requirements for the production of organic foodstuffs. This certification is a means of ensuring that the foodstuffs produced comply with these requirements.'
-            },{
-                image: 'https://agriwell.com/wp-content/uploads/2019/06/eu-bio-thumb-1.png',
-                title: 'EU BIO-CERTIFICATION',
-                subtitle: 'The European Union has a strict set of requirements for the production of organic foodstuffs. This certification is a means of ensuring that the foodstuffs produced comply with these requirements.'
-            }],
+            partner_logo: [],
+            our_social:[],
+            ourcertifications: [],
+            certification_logo: [],
+            certification: [],
             strictpage: {
                 title: 'STRICT SUPERVISION',
                 subtitle: 'Confirmation of our goods’ organic status is under strict supervision, based on samples that are analysed in accredited European laboratories prior export approval.'
             },
-            strict_logo: [{
-                image: 'https://agriwell.com/wp-content/uploads/2019/08/galab-1.png'
-            },{
-                image: 'https://agriwell.com/wp-content/uploads/2019/08/galab-1.png'
-            },{
-                image: 'https://agriwell.com/wp-content/uploads/2019/08/galab-1.png'
-            },{
-                image: 'https://agriwell.com/wp-content/uploads/2019/08/galab-1.png'
-            }],
-            headqc:{
-                image: 'https://agriwell.com/wp-content/uploads/2021/07/Anton_r_new-1600x1600.jpg',
-                name: 'Anton R',
-                title: 'Head of Quality Control',
-            },
-            heademail: {
-                title: 'CALL OR EMAIL TO LEARN MORE',
-                subtitle: 'Use the form below or call +420 226 208 232 to learn more about our certificates and quality assurance.'
-            }
+            strict_logo: [],
+            headqc:[],
+            heademail: []
         }
+    },
+    methods: {
+        async loadData(){
+            await axios.get('/api/quality/partner_logo').then(res => {
+                this.partner_logo = res.data
+            })
+
+            await axios.get('/api/quality/our_social').then(res => {
+                this.our_social = res.data
+            })
+
+            await axios.get('/api/quality/ourcertifications').then(res => {
+                this.ourcertifications = res.data
+            })
+
+            await axios.get('/api/quality/certification_logo').then(res => {
+                this.certification_logo = res.data
+            })
+
+            await axios.get('/api/quality/certification').then(res => {
+                this.certification = res.data
+            })
+
+            await axios.get('/api/quality/strictpage').then(res => {
+                this.strictpage = res.data
+            })
+
+            await axios.get('/api/quality/strict_logo').then(res => {
+                this.strict_logo = res.data
+            })
+
+            await axios.get('/api/quality/headqc').then(res => {
+                this.headqc = res.data
+            })
+
+            await axios.get('/api/quality/heademail').then(res => {
+                this.heademail = res.data
+            })
+
+            this.loading = false
+        }
+    },
+
+    mounted() {
+        this.loadData()
     }
 }
 </script>

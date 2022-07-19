@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\AboutController;
 use App\Http\Controllers\Api\OfferController;
+use App\Http\Controllers\Api\QualityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,4 +68,18 @@ Route::prefix('/offers')->group(function ()
     Route::get('/sub_page5', [OfferController::class, 'getSubpage5']);
     Route::get('/page6', [OfferController::class, 'getPage6']);
     Route::get('/sub_page6', [OfferController::class, 'getSubpage6']);
+});
+
+// Quality
+Route::prefix('/quality')->group(function ()
+{
+    Route::get('/partner_logo', [QualityController::class, 'getPartnerLogo']);
+    Route::get('/our_social', [QualityController::class, 'getOurSocial']);
+    Route::get('/ourcertifications', [QualityController::class, 'getOurCertifications']);
+    Route::get('/certification_logo', [QualityController::class, 'getCertificationLogo']);
+    Route::get('/certification', [QualityController::class, 'getCertification']);
+    Route::get('/strictpage', [QualityController::class, 'getStrictPage']);
+    Route::get('/strict_logo', [QualityController::class, 'getStrictLogo']);
+    Route::get('/headqc', [QualityController::class, 'getHeadQc']);
+    Route::get('/heademail', [QualityController::class, 'getHeadEmail']);
 });

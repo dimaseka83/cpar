@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             HomeSeeder::class,
             AboutSeeder::class,
             OfferSeeder::class,
+            QualitySeeder::class,
         ]);
     }
 }
