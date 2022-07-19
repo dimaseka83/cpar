@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\AboutController;
-use App\Http\Controllers\Api\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\HomeController;
+use App\Http\Controllers\Api\AboutController;
+use App\Http\Controllers\Api\OfferController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,4 +53,18 @@ Route::prefix('/about')->group(function ()
     Route::get('/team', [AboutController::class, 'getTeam']);
     Route::get('/team_details', [AboutController::class, 'getTeamDetails']);
     Route::get('/about_ceo', [AboutController::class, 'getAboutCeo']);
+});
+
+// offers
+Route::prefix('/offers')->group(function ()
+{
+    Route::get('/offer', [OfferController::class, 'getOffers']);
+    Route::get('/offer_prd', [OfferController::class, 'getOfferPrd']);
+    Route::get('/offer_penawaran', [OfferController::class, 'getOfferPenawaran']);
+    Route::get('/page3', [OfferController::class, 'getPage3']);
+    Route::get('/sub_page3', [OfferController::class, 'getSubpage3']);
+    Route::get('/page4', [OfferController::class, 'getPage4']);
+    Route::get('/sub_page5', [OfferController::class, 'getSubpage5']);
+    Route::get('/page6', [OfferController::class, 'getPage6']);
+    Route::get('/sub_page6', [OfferController::class, 'getSubpage6']);
 });

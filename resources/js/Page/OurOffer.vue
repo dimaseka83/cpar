@@ -1,6 +1,12 @@
 <template>
     <v-app>
-        <Nav/>
+        <v-container fluid class="fill-height" v-if="loading">
+            <v-row align="center" justify="center">
+                <v-progress-circular indeterminate color="primary"></v-progress-circular>
+            </v-row>
+        </v-container>
+      <div v-else>
+          <Nav/>
         <!-- Page 1 -->
         <v-content class="bg-image" style="background-image: url(https://agriwell.com/wp-content/uploads/2019/05/field.png);">
             <v-container class="fill-height py-16">
@@ -27,7 +33,7 @@
                 <v-row>
                     <v-col :cols="nosm ? '4' : '12'" v-for="(prd, i) in offer_prd" :key="'offer_prd'+i">
                         <v-card :height="height - 300">
-                            <v-img :height="height - 300" :src="prd.image"></v-img>
+                            <v-img :height="height - 300" :src="'./images/offer/offer_prd/'+prd.image"></v-img>
                         </v-card>
                         <p class="title font-weight-light mt-5">{{ prd.title }}</p>
                         <p class="subtitle font-weight-light grey--text">{{ prd.subtitle }}</p>
@@ -134,6 +140,7 @@
             </v-container>
         </v-content>
         <Footer/>
+      </div>
     </v-app>
 </template>
 <script>
@@ -150,6 +157,7 @@ export default {
     },
     data() {
         return {
+            loading: true,
             items: [
                  {
                 text: 'Home',
@@ -162,110 +170,70 @@ export default {
                 href: '/our-offer',
                 },
             ],
-            offer: {
-                title: 'What Do We Offer?',
-                subtitle: 'We provide a wide range of organic agricultural products for food as well as for feed.'
-            },
-            offer_prd: [{
-                image: 'https://agriwell.com/wp-content/uploads/2019/07/flax-brown-thumb.png',
-                title: 'OILSEEDS',
-                subtitle: 'We offer a variety of oilseeds, such as flax, rapeseed, sunflower seeds, and more.',
-            },{
-                image: 'https://agriwell.com/wp-content/uploads/2019/07/flax-brown-thumb.png',
-                title: 'OILSEEDS',
-                subtitle: 'We offer a variety of oilseeds, such as flax, rapeseed, sunflower seeds, and more.',
-            },{
-                image: 'https://agriwell.com/wp-content/uploads/2019/07/flax-brown-thumb.png',
-                title: 'OILSEEDS',
-                subtitle: 'We offer a variety of oilseeds, such as flax, rapeseed, sunflower seeds, and more.',
-            },{
-                image: 'https://agriwell.com/wp-content/uploads/2019/07/flax-brown-thumb.png',
-                title: 'OILSEEDS',
-                subtitle: 'We offer a variety of oilseeds, such as flax, rapeseed, sunflower seeds, and more.',
-            },{
-                image: 'https://agriwell.com/wp-content/uploads/2019/07/flax-brown-thumb.png',
-                title: 'OILSEEDS',
-                subtitle: 'We offer a variety of oilseeds, such as flax, rapeseed, sunflower seeds, and more.',
-            },{
-                image: 'https://agriwell.com/wp-content/uploads/2019/07/flax-brown-thumb.png',
-                title: 'OILSEEDS',
-                subtitle: 'We offer a variety of oilseeds, such as flax, rapeseed, sunflower seeds, and more.',
-            }],
-            offer_penawaran: {
-                title: 'Do you want to purchase our organic products or offer us your organic commodities?',
-                subtitle: 'Please read our general terms for purchase or sale.'
-            },
-            page3: {
-                title: 'What We Do?',
-                subtitle: 'Our aim is to continue building up environmentally-friendly agricultural production with an eye to the health of the people who consume our products and the fertility of our soils.'
-            },
-            sub_page3: [{
-                icon: 'mdi-biohazard',
-                title: 'Quality & Reliability',
-                subtitle: 'We are committed to providing the highest quality of products and services to our customers.',
-            },{
-                icon: 'mdi-biohazard',
-                title: 'Quality & Reliability',
-                subtitle: 'We are committed to providing the highest quality of products and services to our customers.',
-            },{
-                icon: 'mdi-biohazard',
-                title: 'Quality & Reliability',
-                subtitle: 'We are committed to providing the highest quality of products and services to our customers.',
-            },{
-                icon: 'mdi-biohazard',
-                title: 'Quality & Reliability',
-                subtitle: 'We are committed to providing the highest quality of products and services to our customers.',
-            }],
-            page4: {
-                title: 'How We Work',
-                subtitle: 'Our know-how in the organic sector comes from more than a decade of experience, structured supply methods, and our worldwide operations. We actively seek out new projects, regions, and producers for organic farming.'
-            },
-            sub_page5: [{
-                icon: 'mdi-handshake',
-                title: 'Farmer Cooperation',
-                subtitle: 'We have long-term relationships, including contract farming, with producers in suitable geographical locations who share our values.',
-            },{
-                icon: 'mdi-handshake',
-                title: 'Farmer Cooperation',
-                subtitle: 'We have long-term relationships, including contract farming, with producers in suitable geographical locations who share our values.',
-            },{
-                icon: 'mdi-handshake',
-                title: 'Farmer Cooperation',
-                subtitle: 'We have long-term relationships, including contract farming, with producers in suitable geographical locations who share our values.',
-            },{
-                icon: 'mdi-handshake',
-                title: 'Farmer Cooperation',
-                subtitle: 'We have long-term relationships, including contract farming, with producers in suitable geographical locations who share our values.',
-            }],
-            page6: {
-                title: 'Our Organic Progress',
-                subtitle: 'Our group has been producing and selling 100% organic goods since 2009. AGRIWELL s.r.o. and all our contractual farms are certified in the EU'
-            },
-            subpage6: [{
-                number: 10,
-                title: 'Over 10 Years on the Market',
-                subtitle: 'We produce, export, and import organic agricultural products in the EU.'
-            },{
-                number: 20,
-                title: 'Over 10 Years on the Market',
-                subtitle: 'We produce, export, and import organic agricultural products in the EU.'
-            },{
-                number: 54000,
-                title: 'Over 10 Years on the Market',
-                subtitle: 'We produce, export, and import organic agricultural products in the EU.'
-            },{
-                number: 26000,
-                title: 'Over 10 Years on the Market',
-                subtitle: 'We produce, export, and import organic agricultural products in the EU.'
-            }]
+            offer: [],
+            offer_prd: [],
+            offer_penawaran: [],
+            page3: [],
+            sub_page3: [],
+            page4: [],
+            sub_page5: [],
+            page6: [],
+            subpage6: []
         }
+    },
+    methods: {
+        async loadData(){
+            await axios.get('/api/offers/offer').then(res => {
+                this.offer = res.data
+            })
+
+            await axios.get('/api/offers/offer_prd').then(res => {
+                this.offer_prd = res.data
+            })
+
+            await axios.get('/api/offers/offer_penawaran').then(res => {
+                this.offer_penawaran = res.data
+            })
+
+            await axios.get('/api/offers/page3').then(res => {
+                this.page3 = res.data
+            })
+
+            await axios.get('/api/offers/sub_page3').then(res => {
+                this.sub_page3 = res.data
+            })
+
+            await axios.get('/api/offers/page4').then(res => {
+                this.page4 = res.data
+            })
+
+            await axios.get('/api/offers/sub_page5').then(res => {
+                this.sub_page5 = res.data
+            })
+
+            await axios.get('/api/offers/page6').then(res => {
+                this.page6 = res.data
+            })
+            
+            await axios.get('/api/offers/sub_page6').then(res => {
+                this.subpage6 = res.data
+            })
+            this.loading = false
+        }
+    },
+    mounted() {
+        this.loadData()
     },
     computed: {
         subpage3_left(){
-            return this.sub_page3.filter((item, i) => i < 2)
+            if(this.sub_page3.length > 0){
+                return this.sub_page3.filter((item, i) => i < 2)
+            }
         },
         subpage3_right(){
-            return this.sub_page3.filter((item, i) => i > 1)
+            if(this.sub_page3.length > 0){
+                return this.sub_page3.filter((item, i) => i > 1)
+            }
         }
     }
 }
