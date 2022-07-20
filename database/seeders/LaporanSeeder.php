@@ -19,7 +19,7 @@ class LaporanSeeder extends Seeder
             [
                 'laporan' => 'Laporan 1',
                 'area' => 'California',
-                'tanggal' => '2020-01-01',
+                'tanggal' => '2022-05-01',
                 'minyak' => '100',
                 'non_minyak' => '200',
                 'all' => '300',
@@ -27,7 +27,7 @@ class LaporanSeeder extends Seeder
             [
                 'laporan' => 'Laporan 2',
                 'area' => 'Colorado',
-                'tanggal' => '2020-01-01',
+                'tanggal' => '2022-06-01',
                 'minyak' => '100',
                 'non_minyak' => '200',
                 'all' => '300',
@@ -35,7 +35,7 @@ class LaporanSeeder extends Seeder
             [
                 'laporan' => 'Laporan 3',
                 'area' => 'California',
-                'tanggal' => '2020-01-01',
+                'tanggal' => '2022-07-01',
                 'minyak' => '100',
                 'non_minyak' => '200',
                 'all' => '300',
@@ -43,7 +43,7 @@ class LaporanSeeder extends Seeder
             [
                 'laporan' => 'Laporan 4',
                 'area' => 'Colorado',
-                'tanggal' => '2020-01-01',
+                'tanggal' => '2022-08-01',
                 'minyak' => '100',
                 'non_minyak' => '200',
                 'all' => '300',

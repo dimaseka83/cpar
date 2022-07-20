@@ -9,9 +9,50 @@
         <Nav/>
         <v-container class="my-16">
             <p class="display-1">Data Laporan</p>
+            <v-menu
+        ref="menu"
+        v-model="menu"
+        transition="scale-transition"
+        offset-y
+        min-width="auto"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-text-field
+            v-model="date"
+            label="Tanggal Laporan"
+            prepend-icon="mdi-calendar"
+            readonly
+            v-bind="attrs"
+            v-on="on"
+            clearable
+            @click:clear="date = null"
+          ></v-text-field>
+        </template>
+        <v-date-picker
+          v-model="date"
+          no-title
+          scrollable
+        >
+          <v-spacer></v-spacer>
+          <v-btn
+            text
+            color="primary"
+            @click="menu = false"
+          >
+            Cancel
+          </v-btn>
+          <v-btn
+            text
+            color="primary"
+            @click="$refs.menu.save(date)"
+          >
+            OK
+          </v-btn>
+        </v-date-picker>
+      </v-menu>
             <v-data-table 
             :headers="headers"
-            :items="laporan"
+            :items="filterdatelaporan"
             group-by="area"
             ></v-data-table>
         </v-container>
@@ -32,6 +73,9 @@ export default {
     data () {
       return {
         loading: true,
+        menu: false,
+              date: null,
+      menu: false,
         headers: [
           {
             text: '',
@@ -54,6 +98,19 @@ export default {
                 this.laporan = response.data
             })
             this.loading = false
+        }
+    },
+
+    computed: {
+        filterdatelaporan(){
+            if(this.date == null){
+                return this.laporan
+            }
+            else{
+                return this.laporan.filter(laporan => {
+                    return laporan.tanggal == this.date
+                })
+            }
         }
     },
 
