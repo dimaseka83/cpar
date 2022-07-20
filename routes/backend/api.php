@@ -71,7 +71,7 @@ Route::prefix('/postOffer')->group(function ()
 });
 
 // Quality
-Route::prefix('/quality')->group(function ()
+Route::prefix('/postQuality')->group(function ()
 {
     Route::post('/partner_logo', [QualityController::class, 'postPartnerLogo']);
     Route::post('/our_social', [QualityController::class, 'postOurSocial']);
@@ -85,7 +85,7 @@ Route::prefix('/quality')->group(function ()
 });
 
 // Contacts
-Route::prefix('/contacts')->group(function ()
+Route::prefix('/postContacts')->group(function ()
 {
     Route::post('/officeinf', [ContactsController::class, 'postOfficeInf']);
     Route::post('/companyinf', [ContactsController::class, 'postCompanyInf']);
@@ -101,7 +101,7 @@ Route::prefix('/contacts')->group(function ()
 });
 
 // Perusahaan
-Route::prefix('/company')->group(function ()
+Route::prefix('/postCompany')->group(function ()
 {
     Route::post('/perusahaan', [PerusahaanController::class, 'postPerusahaan']);
     Route::post('/contact', [PerusahaanController::class, 'postContact']);
@@ -109,7 +109,7 @@ Route::prefix('/company')->group(function ()
     Route::post('/detailFooter', [PerusahaanController::class, 'postDetailFooter']);
 });
 
-Route::prefix('/laporan')->group(function ()
+Route::prefix('/postLaporan')->group(function ()
 {
     Route::post('/laporan', [LaporanController::class, 'postLaporan']);
 });
