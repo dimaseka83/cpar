@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             QualitySeeder::class,
             ContactSeeder::class,
             CompanySeeder::class,
+            LaporanSeeder::class,
         ]);
     }
 }

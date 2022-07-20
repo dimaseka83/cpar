@@ -4,10 +4,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\AboutController;
-use App\Http\Controllers\Api\ContactsController;
 use App\Http\Controllers\Api\OfferController;
-use App\Http\Controllers\Api\PerusahaanController;
+use App\Http\Controllers\Api\LaporanController;
 use App\Http\Controllers\Api\QualityController;
+use App\Http\Controllers\Api\ContactsController;
+use App\Http\Controllers\Api\PerusahaanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,4 +110,9 @@ Route::prefix('/company')->group(function ()
     Route::get('/contact', [PerusahaanController::class, 'getContact']);
     Route::get('/social_media', [PerusahaanController::class, 'getSocialMedia']);
     Route::get('/detailFooter', [PerusahaanController::class, 'getDetailFooter']);
+});
+
+Route::prefix('/laporan')->group(function ()
+{
+    Route::get('/laporan', [LaporanController::class, 'getLaporan']);
 });
