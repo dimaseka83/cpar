@@ -52,4 +52,139 @@ class OfferController extends Controller
     {
         return response()->json(subpage6offer::all());
     }
+
+    public function postOffer(Request $request)
+    {
+        try {
+            if(isset($request->id)){
+                $offer = offer::find($request->id);
+                $offer->update($request->all());
+            }else{
+                $offer = offer::create($request->all());
+            }
+            return response()->json($offer);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function postOfferPrd(Request $request)
+    {
+        try {
+            if(isset($request->id)){
+                $offer = offer_prd::find($request->id);
+                $offer->update($request->all());
+            }else{
+                $offer = offer_prd::create($request->all());
+            }
+            return response()->json($offer);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function postOfferPenawaran(Request $request)
+    {
+        try {
+            if(isset($request->id)){
+                $offer = offer_penawaran::find($request->id);
+                $offer->update($request->all());
+            }else{
+                $offer = offer_penawaran::create($request->all());
+            }
+            return response()->json($offer);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function postPage3(Request $request)
+    {
+        try {
+            if(isset($request->id)){
+                $offer = page3offer::find($request->id);
+                $offer->update($request->all());
+            }else{
+                $offer = page3offer::create($request->all());
+            }
+            return response()->json($offer);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function postSubpage3(Request $request)
+    {
+        try {
+            if(isset($request->id)){
+                $offer = subpage3offer::find($request->id);
+                $offer->update($request->all());
+            }else{
+                $offer = subpage3offer::create($request->all());
+            }
+            return response()->json($offer);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function postPage4(Request $request)
+    {
+        try {
+            if(isset($request->id)){
+                $offer = page4offer::find($request->id);
+                $offer->update($request->all());
+            }else{
+                $offer = page4offer::create($request->all());
+            }
+            return response()->json($offer);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function postSubpage5(Request $request)
+    {
+        try {
+            if(isset($request->id)){
+                $offer = subpage5offer::find($request->id);
+                $offer->update($request->all());
+            }else{
+                $offer = subpage5offer::create($request->all());
+            }
+            return response()->json($offer);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function postPage6(Request $request)
+    {
+        try {
+            if(isset($request->id)){
+                $offer = page6offer::find($request->id);
+                $offer->update($request->all());
+            }else{
+                $offer = page6offer::create($request->all());
+            }
+            return response()->json($offer);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function postSubpage6(Request $request)
+    {
+        try {
+            if(isset($request->id)){
+                $offer = subpage6offer::find($request->id);
+                $offer->update($request->all());
+            }else{
+                $offer = subpage6offer::create($request->all());
+            }
+            return response()->json($offer);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
 }

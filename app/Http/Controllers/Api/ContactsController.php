@@ -66,4 +66,146 @@ class ContactsController extends Controller
     {
         return response()->json(contact_title::all());
     }
+
+    public function postOfficeInf(Request $request)
+    {
+        try {
+            if (isset($request->id)) {
+                $officeinf = officeinf::find($request->id);
+                $officeinf->update($request->all());
+            } else {
+                $officeinf = officeinf::create($request->all());
+            }
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function postCompanyInf(Request $request)
+    {
+        try {
+            if (isset($request->id)) {
+                $companyinf = companyinf::find($request->id);
+                $companyinf->update($request->all());
+            } else {
+                $companyinf = companyinf::create($request->all());
+            }
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function postBillingInf(Request $request)
+    {
+        try {
+            if (isset($request->id)) {
+                $billinginf = billinginf::find($request->id);
+                $billinginf->update($request->all());
+            } else {
+                $billinginf = billinginf::create($request->all());
+            }
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function postRegistration(Request $request)
+    {
+        try {
+            if (isset($request->id)) {
+                $registration = registration::find($request->id);
+                $registration->update($request->all());
+            } else {
+                $registration = registration::create($request->all());
+            }
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function postVat(Request $request)
+    {
+        try {
+            if (isset($request->id)) {
+                $vat = vat::find($request->id);
+                $vat->update($request->all());
+            } else {
+                $vat = vat::create($request->all());
+            }
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function postDatabox(Request $request)
+    {
+        try {
+            if (isset($request->id)) {
+                $databox = databox::find($request->id);
+                $databox->update($request->all());
+            } else {
+                $databox = databox::create($request->all());
+            }
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function postAdditional(Request $request)
+    {
+        try {
+            if (isset($request->id)) {
+                $additional = additional::find($request->id);
+                $additional->update($request->all());
+            } else {
+                $additional = additional::create($request->all());
+            }
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function postPhone(Request $request)
+    {
+        try {
+            if (isset($request->id)) {
+                $phone = phone::find($request->id);
+                $phone->update($request->all());
+            } else {
+                $phone = phone::create($request->all());
+            }
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function postNameBank(Request $request)
+    {
+        try {
+            if (isset($request->id)) {
+                $name_bank = name_bank::find($request->id);
+                $name_bank->update($request->all());
+            } else {
+                $name_bank = name_bank::create($request->all());
+            }
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function postContactTitle(Request $request)
+    {
+        try {
+            if (isset($request->id)) {
+                $contact_title = contact_title::find($request->id);
+                $contact_title->update($request->all());
+            } else {
+                $contact_title = contact_title::create($request->all());
+            }
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    
 }

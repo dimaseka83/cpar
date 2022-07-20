@@ -12,4 +12,18 @@ class LaporanController extends Controller
     {
         return response()->json(laporan::all());
     }
+
+    public function postLaporan(Request $request)
+    {
+        try {
+            if(isset($request->id)){
+                $laporan = laporan::find($request->id);
+                $laporan->update($request->all());
+            }else{
+                $laporan = laporan::create($request->all());
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
+        }
+    }
 }
