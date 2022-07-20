@@ -1,28 +1,6 @@
 export default {
     data() {
         return {
-            perusahaan: {
-                phone: '+62812-1234-1234',
-                open_day: 'Senin - Jumat',
-                open_hour: '08.00 - 17.00',
-            },
-            contact: [{
-                icon: 'mdi-phone',
-                text: '+62812-1234-1234',
-            },
-            {
-                icon: 'mdi-email',
-                text: 'mail@mail.com'
-            },
-            {
-                icon: 'mdi-map-marker',
-                text: 'Jl. Kebon Kacang No.1, Jakarta'
-            },
-            {
-                icon: 'mdi-clock-outline',
-                text: 'Mon-Fri: 9:00 - 17:00'
-            }
-            ],
             menu: [
                 {
                     name: 'Home',
@@ -57,20 +35,34 @@ export default {
                     icon: 'mdi-information',
                     link: '/laporan',
                 }],
-            social_media: [{
-                link: 'https://www.facebook.com/',
-                icon: 'mdi-facebook',
-            },{
-                link: 'https://www.instagram.com/',
-                icon: 'mdi-instagram',
-            },{
-                icon: 'mdi-linkedin',
-                link: 'https://www.linkedin.com/',
-            },{
-                icon: 'mdi-youtube',
-                link: 'https://www.youtube.com/',
-            }]  
+            perusahaan: [],
+            contact: [],
+            social_media: [],
+            footer: [],
         }
+    },
+    methods: {
+        async loadData(){
+            await axios.get('/api/company/perusahaan').then(response => {
+                this.perusahaan = response.data;
+            })
+            
+            await axios.get('/api/company/contact').then(response => {
+                this.contact = response.data;
+            })
+
+            await axios.get('/api/company/social_media').then(response => {
+                this.social_media = response.data;
+            })
+
+            await axios.get('/api/company/detailFooter').then(response => {
+                this.footer = response.data;
+            })
+        }
+    },
+
+    mounted() {
+        this.loadData();
     },
     computed: {
         height() {

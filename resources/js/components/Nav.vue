@@ -2,10 +2,12 @@
     <div>
         <v-app-bar dense color="#23A455" dark>
             <v-toolbar-title  :class="[ nosm ? 'ml-12' : '']">
+                <div v-for="(per, i) in perusahaan" :key="'perusahaan'+i">
                 <v-icon>mdi-phone</v-icon>
-                <span class="ml-2 body-2 font-weight-light">{{ perusahaan.phone }}</span>
+                <span class="ml-2 body-2 font-weight-light">{{ per.phone }}</span>
                 <v-icon class="ml-12" v-show="nosm">mdi-clock-outline</v-icon>
-                <span class="ml-2 body-2 font-weight-light" v-show="nosm">{{ perusahaan.open_day }} {{ perusahaan.open_hour }}</span>
+                <span class="ml-2 body-2 font-weight-light" v-show="nosm">{{ per.open_day }} {{ per.open_hour }}</span>
+                </div>
             </v-toolbar-title>
         </v-app-bar>
         <v-app-bar color="#54595F" dark >

@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\AboutController;
 use App\Http\Controllers\Api\ContactsController;
 use App\Http\Controllers\Api\OfferController;
+use App\Http\Controllers\Api\PerusahaanController;
 use App\Http\Controllers\Api\QualityController;
 
 /*
@@ -99,4 +100,13 @@ Route::prefix('/contacts')->group(function ()
     Route::get('/name_bank', [ContactsController::class, 'getNameBank']);
     Route::get('/contact_title', [ContactsController::class, 'getContactTitle']);
     
+});
+
+// Perusahaan
+Route::prefix('/company')->group(function ()
+{
+    Route::get('/perusahaan', [PerusahaanController::class, 'getPerusahaan']);
+    Route::get('/contact', [PerusahaanController::class, 'getContact']);
+    Route::get('/social_media', [PerusahaanController::class, 'getSocialMedia']);
+    Route::get('/detailFooter', [PerusahaanController::class, 'getDetailFooter']);
 });

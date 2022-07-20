@@ -1,5 +1,11 @@
 <template>
     <v-app>
+                <v-container fluid class="fill-height" v-if="loading">
+            <v-row align="center" justify="center">
+                <v-progress-circular indeterminate color="primary"></v-progress-circular>
+            </v-row>
+        </v-container>
+        <div v-else>
         <Nav/>
         <!-- Page 1 -->
         <v-content class="bg-image" style="background-image: url(https://agriwell.com/wp-content/uploads/2019/05/sunflower3-header.png);">
@@ -25,32 +31,35 @@
                     <v-row>
                         <v-col cols="2"><v-icon color="green" x-large>mdi-map-marker-outline</v-icon></v-col>
                         <v-col>
+                            <div v-for="(offinf, i) in officeinf" :key="'officeinf'+i">
                             <v-row>
                                 <v-col>
-                                    <p class="display-1 black--text">{{ officeinf.title }}</p>
-                                <p class="title mt-5">{{ officeinf.title_addr }} :</p>
+                                    <p class="display-1 black--text">{{ offinf.title }}</p>
+                                <p class="title mt-5">{{ offinf.title_addr }} :</p>
                                 <div class="mr-16 pr-16 grey--text">
-                                <span class="title">{{ officeinf.office_name }}</span>
-                                <span class="title">{{ officeinf.addr }}</span>
+                                <span class="title">{{ offinf.office_name }}</span>
+                                <span class="title">{{ offinf.addr }}</span>
                                 </div>
                                 </v-col>
                             </v-row>
                             <v-row>
                                 <v-col>
-                                    <p class="title black--text">{{ officeinf.phone_title }} :</p>
+                                    <p class="title black--text">{{ offinf.phone_title }} :</p>
                                     <p class="grey--text" v-for="(ph, i) in phone" :key="''+i">{{ ph.number }} - {{ ph.title }}</p>
                                 </v-col>
                             </v-row>
+                                </div>
+
                             <v-row>
                                 <v-col>
                                     <p class="title black--text">Email :</p>
-                                    <p class="grey--text">{{ contact[1].text }}</p>
+                                    <p class="grey--text">{{ contactcts[1].text }}</p>
                                 </v-col>
                             </v-row>
                             <v-row>
                                 <v-col>
                                     <p class="title black--text">Opening Hours :</p>
-                                    <p class="grey--text">{{ contact[3].text }}</p>
+                                    <p class="grey--text">{{ contactcts[3].text }}</p>
                                 </v-col>
                             </v-row>
                         </v-col>
@@ -60,33 +69,35 @@
                     <v-row>
                         <v-col cols="2"><v-icon color="green" x-large>mdi-map-marker-outline</v-icon></v-col>
                         <v-col>
+                            <div v-for="(cpinf, i) in companyinf" :key="'companyinf'+i">
                             <v-row>
                                 <v-col>
-                                <p class="display-1 black--text">{{ companyinf.title }}</p>
-                                <p class="title mt-5">{{ companyinf.title_reg }} :</p>
+                                <p class="display-1 black--text">{{ cpinf.title }}</p>
+                                <p class="title mt-5">{{ cpinf.title_reg }} :</p>
                                 <div class="mr-16 pr-16 grey--text">
-                                <span class="title">{{ registration }}</span>
+                                <span class="title" v-for="(reg, i) in registration" :key="'registration'+ i">{{ reg.registration }}</span>
                                 </div>
                                 </v-col>
                             </v-row>
                             <v-row>
                                 <v-col>
-                                    <p class="title mt-5">{{ companyinf.title_vat }} :</p>
+                                    <p class="title mt-5">{{ cpinf.title_vat }} :</p>
                                     <p class="title grey--text" v-for="(vt, i) in vat" :key="'vat'+ i">{{ vt.text }} {{ vt.title }}</p>
                                 </v-col>
                             </v-row>
                             <v-row>
                                 <v-col>
-                                    <p class="title mt-5">{{ companyinf.title_databox }} :</p>
-                                    <p class="title grey--text">{{ databox }}</p>
+                                    <p class="title mt-5">{{ cpinf.title_databox }} :</p>
+                                    <p class="title grey--text" v-for="(dbox, i) in databox" :key="'databox'+ i">{{ dbox.databox }}</p>
                                 </v-col>
                             </v-row>
                             <v-row>
                                 <v-col>
-                                    <p class="title mt-5">{{ companyinf.title_additional }} :</p>
-                                    <p class="title grey--text">{{ additional }}</p>
+                                    <p class="title mt-5">{{ cpinf.title_additional }} :</p>
+                                    <p class="title grey--text"  v-for="(add, i) in additional" :key="'additional'+ i">{{ add.additional }}</p>
                                 </v-col>
                             </v-row>
+                            </div>
                         </v-col>
                     </v-row>
                     </v-col>
@@ -96,9 +107,11 @@
                         <v-col>
                             <v-row>
                                 <v-col>
-                                <p class="display-1 black--text">{{ billinginf.title }}</p>
-                                <p class="title mt-5">{{ billinginf.title_bank }} :</p>
-                                <p class="title grey--text">{{ name_bank }}</p>
+                                <div v-for="(bilinf, i) in billinginf" :key="'billinginf'+i">
+                                <p class="display-1 black--text">{{ bilinf.title }}</p>
+                                <p class="title mt-5">{{ bilinf.title_reg }} :</p>
+                                <p class="title grey--text" v-for="(nb, i) in name_bank" :key="'name_bank'+i">{{ nb.name_bank }}</p>
+                                </div>
                                 </v-col>
                             </v-row>
                         </v-col>
@@ -124,6 +137,7 @@
             </v-container>
         </v-content>
         <Footer/>
+        </div>
     </v-app>
 </template>
 <script>
@@ -161,49 +175,54 @@ export default {
             phone: [],
             name_bank: [],
             contact_title: [],
+            contactcts: [],
         }
     },
     methods: {
         async loadData(){
-            await axios.get('/api/contacts/officeinf', function(response){
+            await axios.get('/api/contacts/officeinf').then(response => {
                 this.officeinf = response.data;
             });
 
-            await axios.get('/api/contacts/companyinf', function(response){
+            await axios.get('/api/contacts/companyinf').then(response => {
                 this.companyinf = response.data;
             });
 
-            await axios.get('/api/contacts/billinginf', function(response){
+            await axios.get('/api/contacts/billinginf').then(response => {
                 this.billinginf = response.data;
             });
 
-            await axios.get('/api/contacts/registration', function(response){
+            await axios.get('/api/contacts/registration').then(response => {
                 this.registration = response.data;
             });
 
-            await axios.get('/api/contacts/vat', function(response){
+            await axios.get('/api/contacts/vat').then(response => {
                 this.vat = response.data;
             });
 
-            await axios.get('/api/contacts/databox', function(response){
+            await axios.get('/api/contacts/databox').then(response => {
                 this.databox = response.data;
             });
 
-            await axios.get('/api/contacts/additional', function(response){
+            await axios.get('/api/contacts/additional').then(response => {
                 this.additional = response.data;
             });
 
-            await axios.get('/api/contacts/phone', function(response){
+            await axios.get('/api/contacts/phone').then(response => {
                 this.phone = response.data;
             });
 
-            await axios.get('/api/contacts/name_bank', function(response){
+            await axios.get('/api/contacts/name_bank').then(response => {
                 this.name_bank = response.data;
             });
 
-            await axios.get('/api/contacts/contact_title', function(response){
+            await axios.get('/api/contacts/contact_title').then(response => {
                 this.contact_title = response.data;
             });
+
+            await axios.get('/api/company/contact').then(response => {
+                this.contactcts = response.data;
+            })
 
             this.loading = false;
         }

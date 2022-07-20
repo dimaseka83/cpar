@@ -33,4 +33,5 @@ import mix from '../mixins/mix.js'
 export default {
     mixins: [mix],
 }
+
 </script>
