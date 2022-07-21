@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class subpage6offer extends Model
 {
     use HasFactory;
+    protected $fillable = ['number','title', 'subtitle'];
 }

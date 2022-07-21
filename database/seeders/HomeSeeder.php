@@ -64,7 +64,7 @@ class HomeSeeder extends Seeder
         ];
         $page3 = [
             [
-                'image' => 'home-farmers',
+                'image' => 'home-farmers.png',
                 'title' => 'European expert in organic agriculture',
                 'subtitle' => 'We are a global exporter of top-quality oilseeds, pulses, and grains for human consumption, oil extraction, or animal feed. We specialise in organic agriculture. The core of our offer consists of organic flax seeds in the range of 98–99.99% purity, as well as poppy, mustard, caraway, and other oilseeds. Since 2015 our offer has included dried fruit such as apricots, mulberries, rose hips, and raisins. Most of our goods originate from the Czech Republic, Eastern Europe, and Central Asia.'
             ],

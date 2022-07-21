@@ -29,19 +29,32 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('/postHome')->group(function ()
 {
     Route::post('/slides', [HomeController::class, 'postSlides']);
+    Route::post('/slidesDelete', [HomeController::class, 'postSlidesDelete']);
     Route::post('/images_slides', [HomeController::class, 'postImagesSlides']);
+    Route::post('/images_slidesDelete', [HomeController::class, 'postImagesSlidesDelete']);
     Route::post('/page2', [HomeController::class, 'postPage2']);
+    Route::post('/page2Delete', [HomeController::class, 'page2Delete']);
     Route::post('/page3', [HomeController::class, 'postPage3']);
+    Route::post('/page3Delete', [HomeController::class, 'page3Delete']);
     Route::post('/sub_page3', [HomeController::class, 'postSubpage3']);
+    Route::post('/sub_page3Delete', [HomeController::class, 'subpage3Delete']);
     Route::post('/page4', [HomeController::class, 'postPage4']);
+    Route::post('/page4Delete', [HomeController::class, 'page4Delete']);
     Route::post('/services', [HomeController::class, 'postServices']);
+    Route::post('/servicesDelete', [HomeController::class, 'postServicesDelete']);
     Route::post('/progress', [HomeController::class, 'postProgress']);
+    Route::post('/progressDelete', [HomeController::class, 'postProgressDelete']);
     Route::post('/page5', [HomeController::class, 'postPage5']);
+    Route::post('/page5Delete', [HomeController::class, 'page5Delete']);
     Route::post('/sub_page5', [HomeController::class, 'postSubpage5']);
     Route::post('/page6', [HomeController::class, 'postPage6']);
+    Route::post('/page6Delete', [HomeController::class, 'page6Delete']);
     Route::post('/sub_page6', [HomeController::class, 'postSubpage6']);
+    Route::post('/sub_page6Delete', [HomeController::class, 'subpage6Delete']);
     Route::post('/page7', [HomeController::class, 'postPage7']);
+    Route::post('/page7Delete', [HomeController::class, 'page7Delete']);
     Route::post('/news', [HomeController::class, 'postNews']);
+    Route::post('/newsDelete', [HomeController::class, 'postNewsDelete']);
 });
 
 // about

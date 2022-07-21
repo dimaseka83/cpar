@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class subpage5 extends Model
 {
     use HasFactory;
+    protected $fillable = ['icon', 'title', 'subtitle'];
 }

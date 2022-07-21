@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class team_detail extends Model
 {
     use HasFactory;
+    protected $fillable = ['image', 'name', 'position'];
 }

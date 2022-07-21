@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class officeinf extends Model
 {
     use HasFactory;
+    protected $fillable = ['title', 'title_addr', 'office_name', 'addr', 'phone_title'];
 }

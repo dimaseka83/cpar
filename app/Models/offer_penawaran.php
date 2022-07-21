@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class offer_penawaran extends Model
 {
     use HasFactory;
+    protected $fillable = ['title', 'subtitle'];
 }

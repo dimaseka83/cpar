@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class subpage6 extends Model
 {
     use HasFactory;
+    protected $fillable = ['image', 'title', 'people_name', 'people_position'];
 }

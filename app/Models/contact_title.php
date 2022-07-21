@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class contact_title extends Model
 {
     use HasFactory;
+    protected $fillable = ['title', 'text'];
 }

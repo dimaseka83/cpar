@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class vat extends Model
 {
     use HasFactory;
+    protected $fillable = ['title', 'text'];
 }

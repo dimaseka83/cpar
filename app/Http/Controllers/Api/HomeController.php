@@ -101,7 +101,7 @@ class HomeController extends Controller
                 if ($request->image !== $slide->image && $request->image !== null) {
                     if ($request->hasFile('image')) {
                         if ($slide->image != null) {
-                            $image_path = public_path() . '/images/home/slides' . $slide->image;
+                            $image_path = public_path() . '/images/home/slides/' . $slide->image;
                             if (file_exists($image_path)) {
                                 unlink($image_path);
                             }
@@ -150,14 +150,14 @@ class HomeController extends Controller
                 if ($request->image !== $slide->image && $request->image !== null) {
                     if ($request->hasFile('image')) {
                         if ($slide->image != null) {
-                            $image_path = public_path() . '/images/home/imagesSlides' . $slide->image;
+                            $image_path = public_path() . '/images/home/images_slides/' . $slide->image;
                             if (file_exists($image_path)) {
                                 unlink($image_path);
                             }
                         }
                         $image = $request->file('image');
                         $name = time() . '.' . $image->getClientOriginalExtension();
-                        $destinationPath = public_path('/images/home/imagesSlides');
+                        $destinationPath = public_path('/images/home/images_slides');
                         $image->move($destinationPath, $name);
                     }
                 }
@@ -173,7 +173,7 @@ class HomeController extends Controller
                 if ($request->hasFile('image')) {
                     $image = $request->file('image');
                     $name = time() . '.' . $image->getClientOriginalExtension();
-                    $destinationPath = public_path('/images/home/imagesSlides');
+                    $destinationPath = public_path('/images/home/images_slides');
                     $image->move($destinationPath, $name);
                 }
                 $data = imagesSlides::create([
@@ -210,7 +210,7 @@ class HomeController extends Controller
                 if ($request->image !== $page3->image && $request->image !== null) {
                     if ($request->hasFile('image')) {
                         if ($page3->image != null) {
-                            $image_path = public_path() . '/images/home/page3' . $page3->image;
+                            $image_path = public_path() . '/images/home/page3/' . $page3->image;
                             if (file_exists($image_path)) {
                                 unlink($image_path);
                             }
@@ -367,10 +367,42 @@ class HomeController extends Controller
     {
         try {
             if (isset($request->id)) {
-                $page = subpage6::find($request->id);
-                $page->update($request->all());
+                $subpage6 = subpage6::find($request->id);
+                if ($request->image !== $subpage6->image && $request->image !== null) {
+                    if ($request->hasFile('image')) {
+                        if ($subpage6->image != null) {
+                            $image_path = public_path() . '/images/home/subpage6/' . $subpage6->image;
+                            if (file_exists($image_path)) {
+                                unlink($image_path);
+                            }
+                        }
+                        $image = $request->file('image');
+                        $name = time() . '.' . $image->getClientOriginalExtension();
+                        $destinationPath = public_path('/images/home/subpage6');
+                        $image->move($destinationPath, $name);
+                    }
+                }
+                $subpage6->update([
+                    'image' => $name,
+                    'title' => $request->title,
+                    'people_name' => $request->people_name,
+                    'people_position' => $request->people_position,
+                ]);
             } else {
-                $data = subpage6::create($request->all());
+                if ($request->hasFile('image')) {
+                    $image = $request->file('image');
+                    $name = time() . '.' . $image->getClientOriginalExtension();
+                    $destinationPath = public_path('/images/home/subpage6');
+                    $image->move($destinationPath, $name);
+                } else {
+                    $name = null;
+                }
+                $data = subpage6::create([
+                    'image' => $name,
+                    'title' => $request->title,
+                    'people_name' => $request->people_name,
+                    'people_position' => $request->people_position,
+                ]);
                 return response()->json($data);
             }
         } catch (\Throwable $th) {
@@ -403,7 +435,7 @@ class HomeController extends Controller
                 if ($request->image !== $news->image && $request->image !== null) {
                     if ($request->hasFile('image')) {
                         if ($news->image != null) {
-                            $image_path = public_path() . '/images/home/news' . $news->image;
+                            $image_path = public_path() . '/images/home/news/' . $news->image;
                             if (file_exists($image_path)) {
                                 unlink($image_path);
                             }
@@ -444,6 +476,151 @@ class HomeController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 500);
 
+        }
+    }
+
+    // Delete
+    public function postSlidesDelete(Request $req)
+    {
+        try {
+            $slide = slides::find($req->id);
+            if ($slide->image != null) {
+                $image_path = public_path() . '/images/home/slides/' . $slide->image;
+                if (file_exists($image_path)) {
+                    unlink($image_path);
+                }
+            }
+            $slide->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function page2Delete(Request $req)
+    {
+        try {
+            $page = page2::find($req->id);
+            $page->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function page3Delete(Request $req)
+    {
+        try {
+            $page = page3::find($req->id);
+            if ($page->image != null) {
+                $image_path = public_path() . '/images/home/page3/' . $page->image;
+                if (file_exists($image_path)) {
+                    unlink($image_path);
+                }
+            }
+            $page->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function subpage3Delete(Request $req)
+    {
+        try {
+            $page = subpage3::find($req->id);
+            $page->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function page4Delete(Request $req)
+    {
+        try {
+            $page = page4::find($req->id);
+            $page->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function postServicesDelete(Request $req)
+    {
+        try {
+            $service = services::find($req->id);
+            $service->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function postProgressDelete(Request $req)
+    {
+        try {
+            $progress = progress::find($req->id);
+            $progress->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function page5Delete(Request $req)
+    {
+        try {
+            $page = page5::find($req->id);
+            $page->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function page6Delete(Request $req)
+    {
+        try {
+            $page = page6::find($req->id);
+            $page->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function subpage6Delete(Request $req)
+    {
+        try {
+            $page = subpage6::find($req->id);
+            if ($page->image != null) {
+                $image_path = public_path() . '/images/home/subpage6/' . $page->image;
+                if (file_exists($image_path)) {
+                    unlink($image_path);
+                }
+            }
+            $page->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function page7Delete(Request $req)
+    {
+        try {
+            $page = page7::find($req->id);
+            $page->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function postNewsDelete(Request $req)
+    {
+        try {
+            $news = news::find($req->id);
+            if ($news->image != null) {
+                $image_path = public_path() . '/images/home/news/' . $news->image;
+                if (file_exists($image_path)) {
+                    unlink($image_path);
+                }
+            }
+            $news->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
         }
     }
 }

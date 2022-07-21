@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class social_media extends Model
 {
     use HasFactory;
+    protected $fillable = ['icon', 'link'];
 }

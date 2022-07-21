@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class mission_content extends Model
 {
     use HasFactory;
+    protected $fillable = ['text', 'mission_id'];
 }
