@@ -60,8 +60,12 @@ Route::prefix('/postHome')->group(function ()
 // about
 Route::prefix('/postAbout')->group(function ()
 {
+    Route::get('/missionKhusus', [AboutController::class, 'getMissionKhusus']);
+    Route::get('/mission_contentKhusus', [AboutController::class, 'getMissionContentKhusus']);
     Route::post('/mission', [AboutController::class, 'postMission']);
+    Route::post('/missionDelete', [AboutController::class, 'postMissionDelete']);
     Route::post('/mission_content', [AboutController::class, 'postMissionContent']);
+    Route::post('/mission_contentDelete', [AboutController::class, 'postMissionContent']);
     Route::post('/products', [AboutController::class, 'postProducts']);
     Route::post('/percentage_products', [AboutController::class, 'postPercentageProducts']);
     Route::post('/team', [AboutController::class, 'postTeam']);

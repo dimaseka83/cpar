@@ -26,6 +26,16 @@ class AboutController extends Controller
         return response()->json($data);
     }
 
+    public function getMissionKhusus()
+    {
+        return response()->json(mission::all());
+    }
+
+    public function getMissionContentKhusus()
+    {
+        return response()->json(mission_content::all());
+    }
+
     public function getProducts()
     {
         return response()->json(product::all());
@@ -205,6 +215,26 @@ class AboutController extends Controller
                     'position_ceo' => $request->position_ceo,
                 ]);
             }
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function postMissionDelete(Request $request)
+    {
+        try {
+            $mission = mission::find($request->id);
+            $mission->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function postMissionContentDelete(Request $request)
+    {
+        try {
+            $mission_content = mission_content::find($request->id);
+            $mission_content->delete();
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 500);
         }
