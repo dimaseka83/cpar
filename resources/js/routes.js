@@ -11,7 +11,6 @@ import Laporan from './Page/Laporan.vue';
 // Backend
 import HomeAdmin from './PageAdmin/HomeAdmin.vue';
 import AboutAdmin from './PageAdmin/AboutAdmin.vue';
-import NewsAdmin from './PageAdmin/NewsAdmin.vue';
 import ContactsAdmin from './PageAdmin/ContactsAdmin.vue';
 import OurOfferAdmin from './PageAdmin/OurOfferAdmin.vue';
 import OurProductsAdmin from './PageAdmin/OurProductsAdmin.vue';
@@ -35,7 +34,6 @@ const routes = [
     // Backend
     { path: '/admin', component: HomeAdmin, name: 'Homeadmin' },
     { path: '/admin/about', component: AboutAdmin, name: 'Aboutadmin' },
-    { path: '/admin/news', component: NewsAdmin, name: 'Newsadmin' },
     { path: '/admin/contacts', component: ContactsAdmin, name: 'Contactsadmin' },
     { path: '/admin/our-offer', component: OurOfferAdmin, name: 'OurOfferadmin' },
     { path: '/admin/our-products', component: OurProductsAdmin, name: 'OurProductsadmin' },

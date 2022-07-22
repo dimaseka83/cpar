@@ -69,7 +69,7 @@ class QualityController extends Controller
                 if ($request->image !== $partner_logo->image && $request->image !== null) {
                     if ($request->hasFile('image')) {
                         if ($partner_logo->image != null) {
-                            $image_path = public_path() . '/images/quality/partner_logo' . $partner_logo->image;
+                            $image_path = public_path() . '/images/quality/partner_logo/' . $partner_logo->image;
                             if (file_exists($image_path)) {
                                 unlink($image_path);
                             }
@@ -138,7 +138,7 @@ class QualityController extends Controller
                 if ($request->image !== $certification_logo->image && $request->image !== null) {
                     if ($request->hasFile('image')) {
                         if ($certification_logo->image != null) {
-                            $image_path = public_path() . '/images/quality/certification_logo' . $certification_logo->image;
+                            $image_path = public_path() . '/images/quality/certification_logo/' . $certification_logo->image;
                             if (file_exists($image_path)) {
                                 unlink($image_path);
                             }
@@ -207,7 +207,7 @@ class QualityController extends Controller
                 if ($request->image !== $strict_logo->image && $request->image !== null) {
                     if ($request->hasFile('image')) {
                         if ($strict_logo->image != null) {
-                            $image_path = public_path() . '/images/quality/strict_logo' . $strict_logo->image;
+                            $image_path = public_path() . '/images/quality/strict_logo/' . $strict_logo->image;
                             if (file_exists($image_path)) {
                                 unlink($image_path);
                             }
@@ -246,7 +246,7 @@ class QualityController extends Controller
                 if ($request->image !== $headqc->image && $request->image !== null) {
                     if ($request->hasFile('image')) {
                         if ($headqc->image != null) {
-                            $image_path = public_path() . '/images/quality/headqc' . $headqc->image;
+                            $image_path = public_path() . '/images/quality/headqc/' . $headqc->image;
                             if (file_exists($image_path)) {
                                 unlink($image_path);
                             }
@@ -290,6 +290,109 @@ class QualityController extends Controller
             }else{
                 $heademail = heademail::create($request->all());
             }
+            return response()->json($heademail);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function postHapusPartnerLogo(Request $request)
+    {
+        try {
+            $partner_logo = partner_logo::find($request->id);
+            $image_path = public_path() . '/images/quality/partner_logo/' . $partner_logo->image;
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
+            $partner_logo->delete();
+            return response()->json($partner_logo);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+    public function postHapusOurSocial(Request $request)
+    {
+        try {
+            $our_social = our_social::find($request->id);
+            $our_social->delete();
+            return response()->json($our_social);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function postHapusCertificationLogo(Request $request)
+    {
+        try {
+            $certification_logo = certification_logo::find($request->id);
+            $image_path = public_path() . '/images/quality/certification_logo/' . $certification_logo->image;
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
+            $certification_logo->delete();
+            return response()->json($certification_logo);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function postHapusOurCertifications(Request $request)
+    {
+        try {
+            $our_certifications = ourcertifications::find($request->id);
+            $our_certifications->delete();
+            return response()->json($our_certifications);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function postHapusStrictPage(Request $request)
+    {
+        try {
+            $strict_page = strictpage::find($request->id);
+            $strict_page->delete();
+            return response()->json($strict_page);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+    
+    public function postHapusStrictLogo(Request $request)
+    {
+        try {
+            $strict_logo = strict_logo::find($request->id);
+            $image_path = public_path() . '/images/quality/strict_logo/' . $strict_logo->image;
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
+            $strict_logo->delete();
+            return response()->json($strict_logo);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function postHapusQc(Request $request)
+    {
+        try {
+            $headqc = headqc::find($request->id);
+            $image_path = public_path() . '/images/quality/headqc/' . $headqc->image;
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
+            $headqc->delete();
+            return response()->json($headqc);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function postHapusEmail(Request $request)
+    {
+        try {
+            $heademail = heademail::find($request->id);
+            $heademail->delete();
             return response()->json($heademail);
         } catch (\Exception $e) {
             return response()->json($e->getMessage());

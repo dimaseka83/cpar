@@ -207,5 +207,103 @@ class ContactsController extends Controller
         }
     }
 
+    public function postOfficeInfDelete(Request $request)
+    {
+        try {
+            $officeinf = officeinf::find($request->id);
+            $officeinf->delete();
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function postCompanyInfDelete(Request $request)
+    {
+        try {
+            $companyinf = companyinf::find($request->id);
+            $companyinf->delete();
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function postBillingInfDelete(Request $request)
+    {
+        try {
+            $billinginf = billinginf::find($request->id);
+            $billinginf->delete();
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
     
+    public function postRegistrationDelete(Request $request)
+    {
+        try {
+            $registration = registration::find($request->id);
+            $registration->delete();
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function postVatDelete(Request $request)
+    {
+        try {
+            $vat = vat::find($request->id);
+            $vat->delete();
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function postAdditionalDelete(Request $request)
+    {
+        try {
+            $additional = additional::find($request->id);
+            $additional->delete();
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function postDataboxDelete(Request $request)
+    {
+        try {
+            $databox = databox::find($request->id);
+            $databox->delete();
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function postPhoneDelete(Request $request)
+    {
+        try {
+            $phone = phone::find($request->id);
+            $phone->delete();
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function postNameBankDelete(Request $request)
+    {
+        try {
+            $name_bank = name_bank::find($request->id);
+            $name_bank->delete();
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function postContactTitleDelete(Request $request)
+    {
+        try {
+            $contact_title = contact_title::find($request->id);
+            $contact_title->delete();
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
 }

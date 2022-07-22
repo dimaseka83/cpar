@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class partner_logo extends Model
 {
     use HasFactory;
-    protected $fillable = ['logo'];
+    protected $fillable = ['image'];
 }

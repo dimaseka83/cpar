@@ -73,9 +73,37 @@ class OfferController extends Controller
         try {
             if(isset($request->id)){
                 $offer = offer_prd::find($request->id);
-                $offer->update($request->all());
+                if ($request->image !== $offer->image && $request->image !== null) {
+                    if ($request->hasFile('image')) {
+                        if ($offer->image != null) {
+                            $image_path = public_path() . '/images/offer/offer_prd/' . $offer->image;
+                            if (file_exists($image_path)) {
+                                unlink($image_path);
+                            }
+                        }
+                        $image = $request->file('image');
+                        $name = time() . '.' . $image->getClientOriginalExtension();
+                        $destinationPath = public_path('/images/offer/offer_prd');
+                        $image->move($destinationPath, $name);
+                    }
+                }
+                $offer->update([
+                    'image' => $name,
+                    'title' => $request->title,
+                    'subtitle' => $request->subtitle,
+                ]);
             }else{
-                $offer = offer_prd::create($request->all());
+                if ($request->hasFile('image')) {
+                    $image = $request->file('image');
+                    $name = time() . '.' . $image->getClientOriginalExtension();
+                    $destinationPath = public_path('/images/offer/offer_prd');
+                    $image->move($destinationPath, $name);
+                }
+                $offer = offer_prd::create([
+                    'image' => $name,
+                    'title' => $request->title,
+                    'subtitle' => $request->subtitle,
+                ]);
             }
             return response()->json($offer);
         } catch (\Exception $e) {
@@ -182,6 +210,111 @@ class OfferController extends Controller
             }else{
                 $offer = subpage6offer::create($request->all());
             }
+            return response()->json($offer);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function deleteOffer(Request $request)
+    {
+        try {
+            $offer = offer::find($request->id);
+            $offer->delete();
+            return response()->json($offer);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function deleteOfferPrd(Request $request)
+    {
+        try {
+            $offer = offer_prd::find($request->id);
+            if ($offer->image != null) {
+                $image_path = public_path() . '/images/offer/offer_prd/' . $offer->image;
+                if (file_exists($image_path)) {
+                    unlink($image_path);
+                }
+            }
+            $offer->delete();
+            return response()->json($offer);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+    
+    public function deleteOfferPenawaran(Request $request)
+    {
+        try {
+            $offer = offer_penawaran::find($request->id);
+            $offer->delete();
+            return response()->json($offer);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function deletePage3(Request $request)
+    {
+        try {
+            $offer = page3offer::find($request->id);
+            $offer->delete();
+            return response()->json($offer);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function deleteSubPage3(Request $request)
+    {
+        try {
+            $offer = subpage3offer::find($request->id);
+            $offer->delete();
+            return response()->json($offer);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function deletePage4(Request $request)
+    {
+        try {
+            $offer = page4offer::find($request->id);
+            $offer->delete();
+            return response()->json($offer);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function deleteSubPage5(Request $request)
+    {
+        try {
+            $offer = subpage5offer::find($request->id);
+            $offer->delete();
+            return response()->json($offer);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function page6Delete(Request $request)
+    {
+        try {
+            $offer = page6offer::find($request->id);
+            $offer->delete();
+            return response()->json($offer);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function deleteSubPage6(Request $request)
+    {
+        try {
+            $offer = subpage6offer::find($request->id);
+            $offer->delete();
             return response()->json($offer);
         } catch (\Exception $e) {
             return response()->json($e->getMessage());

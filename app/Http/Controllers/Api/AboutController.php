@@ -140,7 +140,7 @@ class AboutController extends Controller
                 if ($request->image !== $team_detail->image && $request->image !== null) {
                     if ($request->hasFile('image')) {
                         if ($team_detail->image != null) {
-                            $image_path = public_path() . '/images/about/team_detail' . $team_detail->image;
+                            $image_path = public_path() . '/images/about/team_detail/' . $team_detail->image;
                             if (file_exists($image_path)) {
                                 unlink($image_path);
                             }
@@ -160,7 +160,7 @@ class AboutController extends Controller
                 if ($request->hasFile('image')) {
                     $image = $request->file('image');
                     $name = time() . '.' . $image->getClientOriginalExtension();
-                    $destinationPath = public_path('/images/about/about_ceo');
+                    $destinationPath = public_path('/images/about/team_detail');
                     $image->move($destinationPath, $name);
                 }
                 $team_detail = team_detail::create([
@@ -182,7 +182,7 @@ class AboutController extends Controller
                 if ($request->image !== $about_ceo->image && $request->image !== null) {
                     if ($request->hasFile('image')) {
                         if ($about_ceo->image != null) {
-                            $image_path = public_path() . '/images/about/about_ceo' . $about_ceo->image;
+                            $image_path = public_path() . '/images/about/about_ceo/' . $about_ceo->image;
                             if (file_exists($image_path)) {
                                 unlink($image_path);
                             }
@@ -235,6 +235,68 @@ class AboutController extends Controller
         try {
             $mission_content = mission_content::find($request->id);
             $mission_content->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function postAboutCeoDelete(Request $request)
+    {
+        try {
+            $about_ceo = about_ceo::find($request->id);
+            if ($about_ceo->image != null) {
+                $image_path = public_path() . '/images/about/about_ceo/' . $about_ceo->image;
+                if (file_exists($image_path)) {
+                    unlink($image_path);
+                }
+            }
+            $about_ceo->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function postProductsDelete(Request $request)
+    {
+        try {
+            $product = product::find($request->id);
+            $product->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function postPercentageProductsDelete(Request $request)
+    {
+        try {
+            $percentage_product = percentage_product::find($request->id);
+            $percentage_product->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function postTeamDelete(Request $request)
+    {
+        try {
+            $team_detail = team::find($request->id);
+            $team_detail->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function postTeamDetailsDelete(Request $request)
+    {
+        try {
+            $team_detail = team_detail::find($request->id);
+            if ($team_detail->image != null) {
+                $image_path = public_path() . '/images/about/team_detail/' . $team_detail->image;
+                if (file_exists($image_path)) {
+                    unlink($image_path);
+                }
+            }
+            $team_detail->delete();
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 500);
         }

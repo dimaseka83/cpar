@@ -50,7 +50,7 @@ Route::prefix('/postHome')->group(function ()
     Route::post('/page6', [HomeController::class, 'postPage6']);
     Route::post('/page6Delete', [HomeController::class, 'page6Delete']);
     Route::post('/sub_page6', [HomeController::class, 'postSubpage6']);
-    Route::post('/sub_page6Delete', [HomeController::class, 'subpage6Delete']);
+    Route::post('/sub_page6Delete', [HomeController::class, 'subpage6Delete']); 
     Route::post('/page7', [HomeController::class, 'postPage7']);
     Route::post('/page7Delete', [HomeController::class, 'page7Delete']);
     Route::post('/news', [HomeController::class, 'postNews']);
@@ -67,54 +67,86 @@ Route::prefix('/postAbout')->group(function ()
     Route::post('/mission_content', [AboutController::class, 'postMissionContent']);
     Route::post('/mission_contentDelete', [AboutController::class, 'postMissionContent']);
     Route::post('/products', [AboutController::class, 'postProducts']);
+    Route::post('/productsDelete', [AboutController::class, 'postProductsDelete']);
     Route::post('/percentage_products', [AboutController::class, 'postPercentageProducts']);
+    Route::post('/percentage_productsDelete', [AboutController::class, 'postPercentageProductsDelete']);
     Route::post('/team', [AboutController::class, 'postTeam']);
+    Route::post('/teamDelete', [AboutController::class, 'postTeamDelete']);
     Route::post('/team_details', [AboutController::class, 'postTeamDetails']);
+    Route::post('/team_detailsDelete', [AboutController::class, 'postTeamDetailsDelete']);
     Route::post('/about_ceo', [AboutController::class, 'postAboutCeo']);
+    Route::post('/about_ceoDelete' ,[AboutController::class, 'postAboutCeoDelete']);
 });
 
 // offer
 Route::prefix('/postOffer')->group(function ()
 {
     Route::post('/offer', [OfferController::class, 'postOffer']);
+    Route::post('/offerDelete', [OfferController::class, 'deleteOffer']);
     Route::post('/offer_prd', [OfferController::class, 'postOfferPrd']);
+    Route::post('/offer_prdDelete', [OfferController::class, 'deleteOfferPrd']);
     Route::post('/offer_penawaran', [OfferController::class, 'postOfferPenawaran']);
+    Route::post('/offer_penawaranDelete', [OfferController::class, 'deleteOfferPenawaran']);
     Route::post('/page3', [OfferController::class, 'postPage3']);
+    Route::post('/page3Delete', [OfferController::class, 'deletePage3']);
     Route::post('/sub_page3', [OfferController::class, 'postSubpage3']);
+    Route::post('/hapusSubPage3', [OfferController::class, 'deleteSubPage3']);
     Route::post('/page4', [OfferController::class, 'postPage4']);
+    Route::post('/page4Delete', [OfferController::class, 'deletePage4']);
     Route::post('/sub_page5', [OfferController::class, 'postSubpage5']);
+    Route::post('/hapusSubPage5', [OfferController::class, 'deleteSubPage5']);
     Route::post('/page6', [OfferController::class, 'postPage6']);
+    Route::post('/page6Delete', [OfferController::class, 'deletePage6']);
     Route::post('/sub_page6', [OfferController::class, 'postSubpage6']);
+    Route::post('/hapusSubPage6', [OfferController::class, 'deleteSubPage6']);
+
 });
 
 // Quality
 Route::prefix('/postQuality')->group(function ()
 {
     Route::post('/partner_logo', [QualityController::class, 'postPartnerLogo']);
+    Route::post('/hapus_partner_logo', [QualityController::class, 'postHapusPartnerLogo']);
     Route::post('/our_social', [QualityController::class, 'postOurSocial']);
+    Route::post('/hapus_our_social', [QualityController::class, 'postHapusOurSocial']);
     Route::post('/ourcertifications', [QualityController::class, 'postOurCertifications']);
+    Route::post('/hapus_our_certifications', [QualityController::class, 'postHapusOurCertifications']);
     Route::post('/certification_logo', [QualityController::class, 'postCertificationLogo']);
+    Route::post('/hapus_certification_logo', [QualityController::class, 'postHapusCertificationLogo']);
     Route::post('/certification', [QualityController::class, 'postCertification']);
     Route::post('/strictpage', [QualityController::class, 'postStrictpage']);
+    Route::post('/hapus_strict_page', [QualityController::class, 'postHapusStrictPage']);
     Route::post('/strict_logo', [QualityController::class, 'postStrictLogo']);
+    Route::post('/hapus_strict_logo', [QualityController::class, 'postHapusStrictLogo']);
     Route::post('/headqc', [QualityController::class, 'postHeadqc']);
+    Route::post('/hapus_qc', [QualityController::class, 'postHapusQc']);
     Route::post('/heademail', [QualityController::class, 'postHeademail']);
+    Route::post('/hapus_email', [QualityController::class, 'postHapusEmail']);
 });
 
 // Contacts
 Route::prefix('/postContacts')->group(function ()
 {
     Route::post('/officeinf', [ContactsController::class, 'postOfficeInf']);
+    Route::post('/officeinfDelete', [ContactsController::class, 'postOfficeInfDelete']);
     Route::post('/companyinf', [ContactsController::class, 'postCompanyInf']);
+    Route::post('/companyinfDelete', [ContactsController::class, 'postCompanyInfDelete']);
     Route::post('/billinginf', [ContactsController::class, 'postBillingInf']);
+    Route::post('/billinginfDelete', [ContactsController::class, 'postBillingInfDelete']);
     Route::post('/registration', [ContactsController::class, 'postRegistration']);
+    Route::post('/registrationDelete', [ContactsController::class, 'postRegistrationDelete']);
     Route::post('/vat', [ContactsController::class, 'postVat']);
+    Route::post('/vatDelete', [ContactsController::class, 'postVatDelete']);
     Route::post('/databox', [ContactsController::class, 'postDatabox']);
+    Route::post('/databoxDelete', [ContactsController::class, 'postDataboxDelete']);
     Route::post('/additional', [ContactsController::class, 'postAdditional']);
+    Route::post('/additionalDelete', [ContactsController::class, 'postAdditionalDelete']);
     Route::post('/phone', [ContactsController::class, 'postPhone']);
+    Route::post('/phoneDelete', [ContactsController::class, 'postPhoneDelete']);
     Route::post('/name_bank', [ContactsController::class, 'postNameBank']);
+    Route::post('/name_bankDelete', [ContactsController::class, 'postNameBankDelete']);
     Route::post('/contact_title', [ContactsController::class, 'postContactTitle']);
-    
+    Route::post('/contact_titleDelete', [ContactsController::class, 'postContactTitleDelete']);
 });
 
 // Perusahaan
