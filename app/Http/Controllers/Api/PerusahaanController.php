@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\contact;
 use App\Models\footer_desc;
+use App\Models\message;
 use App\Models\perusahaan_detail;
 use App\Models\social_media;
 use Illuminate\Http\Request;
@@ -29,6 +30,11 @@ class PerusahaanController extends Controller
     public function getDetailFooter()
     {
         return response()->json(footer_desc::all());
+    }
+
+    public function getPesan()
+    {
+        return response()->json(message::all());
     }
 
     public function postPerusahaan(Request $request)
@@ -87,6 +93,20 @@ class PerusahaanController extends Controller
         }
     }
 
+    public function postPesan(Request $request)
+    {
+        try {
+            if(isset($request->id)){
+                $message = message::find($request->id);
+                $message->update($request->all());
+            }else{
+                $message = message::create($request->all());
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
+        }
+    }
+
     public function postPerusahaanDelete(Request $request)
     {
         try {
@@ -122,6 +142,16 @@ class PerusahaanController extends Controller
         try {
             $footer_desc = footer_desc::find($request->id);
             $footer_desc->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
+        }
+    }
+
+    public function postPesanDelete(Request $request)
+    {
+        try {
+            $message = message::find($request->id);
+            $message->delete();
         } catch (\Throwable $th) {
             return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
         }

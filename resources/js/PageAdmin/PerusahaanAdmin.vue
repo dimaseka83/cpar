@@ -189,6 +189,50 @@
                     </v-toolbar>
                 </template>
             </v-data-table>
+            <v-data-table :headers="headerspesan" :items="pesan">
+                <template v-slot:item.action="data">
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editPesan(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapusPesan(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
+                <template v-slot:top>
+                    <v-toolbar flat>
+                        <v-toolbar-title>Email</v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-dialog v-model="dialogpesan" max-width="500px">
+                            <template v-slot:activator="{ on, attrs}">
+                                <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
+                            </template>
+                            <v-card>
+                                <v-card-title>Create Slide</v-card-title>
+                                <v-card-text>
+                                    <v-text-field v-model="formspesan.name" label="Name" required></v-text-field>
+                                    <v-text-field v-model="formspesan.email" label="email" required></v-text-field>
+                                    <v-text-field v-model="formspesan.pesan" label="pesan" required></v-text-field>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-btn color="blue darken-1" text @click="dialogpesan = false">Close</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogpesan = false; createPesan()">
+                                        Create</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                    </v-toolbar>
+                </template>
+            </v-data-table>
         </v-card>
     </v-app>
 </template>
@@ -247,6 +291,21 @@ export default {
                 id: '',
                 text: '',
             },
+
+            pesan: [],
+            dialogpesan: false,
+            headerspesan: [
+                { text: 'Nama', value: 'name' }, 
+                { text: 'Email', value: 'email' },
+                { text: 'Pesan', value: 'pesan' },
+                { text: 'Aksi', value: 'action' },
+            ],
+            formspesan: {
+                id: '',
+                name: '',
+                email: '',
+                pesan: '',
+            },
         }
     },
     methods: {
@@ -265,6 +324,10 @@ export default {
 
             await axios.get('/api/company/detailFooter').then(response => {
                 this.footer = response.data;
+            })
+
+            await axios.get('/api/company/pesan').then(response => {
+                this.pesan = response.data;
             })
         },
         async createPerusahaan() {
@@ -353,6 +416,30 @@ export default {
                 this.footer.splice(index, 1);
             })
         },
+
+        async createPesan() {
+            await axios.post('/api/postCompany/pesan', this.formspesan).then(response => {
+                this.loadData();
+                this.formspesan = {
+                    id: '',
+                    name: '',
+                    email: '',
+                    pesan: '',
+                }
+            })
+        },
+
+        editPesan(index) {
+            this.formspesan = this.pesan[index];
+            this.dialogpesan = true;
+        },
+
+        async hapusPesan(index) {
+            await axios.post('/api/postCompany/pesanDelete', this.pesan[index]).then(response => {
+                this.pesan.splice(index, 1);
+            })
+        }
+
     },
     mounted() {
         this.loadData();

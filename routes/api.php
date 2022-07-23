@@ -117,10 +117,10 @@ Route::prefix('/company')->group(function ()
     Route::get('/contact', [PerusahaanController::class, 'getContact']);
     Route::get('/social_media', [PerusahaanController::class, 'getSocialMedia']);
     Route::get('/detailFooter', [PerusahaanController::class, 'getDetailFooter']);
+    Route::get('/pesan', [PerusahaanController::class, 'getPesan']);
 });
 // Laporan
 Route::prefix('/laporan')->group(function ()
 {
     Route::get('/laporan', [LaporanController::class, 'getLaporan']);
 });
-

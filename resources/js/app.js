@@ -14,12 +14,10 @@ Vue.use(VueRouter);
 Vue.use(Vuetify);
 Vue.use(Vuex);
 
-const store = new Vuex.Store(Store);
-window.onload = function () {
     const app = new Vue({
         el: '#app',
-        router,
-        store,
+                router,
+        Store,
         vuetify: new Vuetify(),
         components: {
             "index": Index
@@ -27,5 +25,4 @@ window.onload = function () {
         beforeCreate(){
             this.$store.dispatch('loadStoredState');
         }
-    }); 
-}
+});

@@ -168,11 +168,13 @@ Route::prefix('/postCompany')->group(function ()
     Route::post('/contactDelete', [PerusahaanController::class, 'postContactDelete']);
     
     Route::post('/social_media', [PerusahaanController::class, 'postSocialMedia']);
-    
     Route::post('/social_mediaDelete', [PerusahaanController::class, 'postSocialMediaDelete']);
     
     Route::post('/detailFooter', [PerusahaanController::class, 'postDetailFooter']);
     Route::post('/footerDelete', [PerusahaanController::class, 'postFooterDelete']);
+
+    Route::post('/pesan', [PerusahaanController::class, 'postPesan']);
+    Route::post('/pesanDelete', [PerusahaanController::class, 'postPesanDelete']);
 });
 
 Route::prefix('/postLaporan')->group(function ()
