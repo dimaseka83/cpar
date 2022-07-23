@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\LaporanController;
 use App\Http\Controllers\Api\QualityController;
 use App\Http\Controllers\Api\ContactsController;
 use App\Http\Controllers\Api\PerusahaanController;
+use App\Http\Controllers\Api\OurProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -147,6 +148,15 @@ Route::prefix('/postContacts')->group(function ()
     Route::post('/name_bankDelete', [ContactsController::class, 'postNameBankDelete']);
     Route::post('/contact_title', [ContactsController::class, 'postContactTitle']);
     Route::post('/contact_titleDelete', [ContactsController::class, 'postContactTitleDelete']);
+});
+
+// Our Products
+Route::prefix('/postourproducts')->group(function ()
+{
+    route::post('/ourproducts', [OurProductsController::class, 'postOurProducts']);
+    route::post('/ourproductsDelete', [OurProductsController::class, 'postOurProductsDelete']);
+    route::post('/ourcategory', [OurProductsController::class, 'postOurCategory']);
+    route::post('/ourcategoryDelete', [OurProductsController::class, 'postOurCategoryDelete']);
 });
 
 // Perusahaan

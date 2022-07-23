@@ -31,7 +31,7 @@
                     <v-col :cols="nosm ? '4' : '12'" v-for="(it, i) in productSelect" :key="'prdSelect'+i">
                         <v-hover v-slot="{hover}">
                         <v-card >
-                            <v-img :height="height-300" :src="it.img_prod" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)">
+                            <v-img :height="height-300" :src="'./images/ourproducts/products/'+it.img_prod" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)">
                                 <v-card-text>
                                     <p class="font-weight-bold text-h5 white--text">{{ it.name_prod }}</p>
                                     <p class="font-weight-light subtitle white--text">{{ it.category }}</p>
@@ -74,85 +74,26 @@ export default {
                 },
             ],
             category_select: 'all',
-            category: [{
-                name_cat: 'all',
-            },{
-                name_cat: 'agriculture',
-            },{
-                name_cat: 'fishery',
-            },{
-                name_cat: 'livestock',
-            },{
-                name_cat: 'poultry',
-            },{
-                name_cat: 'veterinary',
-            }],
-            products:[{
-                name_prod: 'Yellow Flax1',
-                img_prod: 'https://agriwell.com/wp-content/uploads/2019/07/flax-yellow-thumb-540x540.png',
-                desc_prod: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                category: 'agriculture',
-            },
-            {
-                name_prod: 'Yellow Flax2',
-                img_prod: 'https://agriwell.com/wp-content/uploads/2019/07/flax-yellow-thumb-540x540.png',
-                desc_prod: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                category: 'agriculture',
-            },
-            {
-                name_prod: 'Yellow Flax3',
-                img_prod: 'https://agriwell.com/wp-content/uploads/2019/07/flax-yellow-thumb-540x540.png',
-                desc_prod: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                category: 'fishery',
-            },
-            {
-                name_prod: 'Yellow Flax4',
-                img_prod: 'https://agriwell.com/wp-content/uploads/2019/07/flax-yellow-thumb-540x540.png',
-                desc_prod: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                category: 'fishery',
-            },
-            {
-                name_prod: 'Yellow Flax5',
-                img_prod: 'https://agriwell.com/wp-content/uploads/2019/07/flax-yellow-thumb-540x540.png',
-                desc_prod: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                category: 'livestock',
-            },
-            {
-                name_prod: 'Yellow Flax6',
-                img_prod: 'https://agriwell.com/wp-content/uploads/2019/07/flax-yellow-thumb-540x540.png',
-                desc_prod: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                category: 'livestock',
-            },
-            {
-                name_prod: 'Yellow Flax7',
-                img_prod: 'https://agriwell.com/wp-content/uploads/2019/07/flax-yellow-thumb-540x540.png',
-                desc_prod: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                category: 'poultry',
-            },
-            {
-                name_prod: 'Yellow Flax8',
-                img_prod: 'https://agriwell.com/wp-content/uploads/2019/07/flax-yellow-thumb-540x540.png',
-                desc_prod: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                category: 'poultry',
-            },
-            {
-                name_prod: 'Yellow Flax9',
-                img_prod: 'https://agriwell.com/wp-content/uploads/2019/07/flax-yellow-thumb-540x540.png',
-                desc_prod: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                category: 'veterinary',
-            },
-            {
-                name_prod: 'Yellow Flax10',
-                img_prod: 'https://agriwell.com/wp-content/uploads/2019/07/flax-yellow-thumb-540x540.png',
-                desc_prod: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                category: 'veterinary',
-            }]
+            category: [],
+            products:[]
         }
     },
     methods: {
+        async loadData() {
+            await axios.get('/api/ourproducts/getDataProducts').then(res => {
+                this.products = res.data
+            })
+
+            await axios.get('/api/ourproducts/getDataCategory').then(res => {
+                this.category = res.data
+            })
+        },
         selectCategory(category) {
             this.category_select = category;
         }
+    },
+    mounted() {
+        this.loadData();
     },
     computed: {
         productSelect() {

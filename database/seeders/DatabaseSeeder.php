@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             ContactSeeder::class,
             CompanySeeder::class,
             LaporanSeeder::class,
+            OurproductsSeeder::class,
         ]);
     }
 }

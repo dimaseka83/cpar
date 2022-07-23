@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\LaporanController;
 use App\Http\Controllers\Api\QualityController;
 use App\Http\Controllers\Api\ContactsController;
+use App\Http\Controllers\Api\OurProductsController;
 use App\Http\Controllers\Api\PerusahaanController;
 
 /*
@@ -99,8 +100,14 @@ Route::prefix('/contacts')->group(function ()
     Route::get('/additional', [ContactsController::class, 'getAdditional']);
     Route::get('/phone', [ContactsController::class, 'getPhone']);
     Route::get('/name_bank', [ContactsController::class, 'getNameBank']);
-    Route::get('/contact_title', [ContactsController::class, 'getContactTitle']);
-    
+    Route::get('/contact_title', [ContactsController::class, 'getContactTitle']); 
+});
+
+// Our Products
+Route::prefix('/ourproducts')->group(function ()
+{
+    Route::get('/getDataProducts', [OurProductsController::class, 'getDataProducts']);
+    Route::get('/getDataCategory', [OurProductsController::class, 'getDataCategory']);
 });
 
 // Perusahaan
@@ -111,8 +118,9 @@ Route::prefix('/company')->group(function ()
     Route::get('/social_media', [PerusahaanController::class, 'getSocialMedia']);
     Route::get('/detailFooter', [PerusahaanController::class, 'getDetailFooter']);
 });
-
+// Laporan
 Route::prefix('/laporan')->group(function ()
 {
     Route::get('/laporan', [LaporanController::class, 'getLaporan']);
 });
+
