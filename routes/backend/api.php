@@ -163,12 +163,20 @@ Route::prefix('/postourproducts')->group(function ()
 Route::prefix('/postCompany')->group(function ()
 {
     Route::post('/perusahaan', [PerusahaanController::class, 'postPerusahaan']);
+    Route::post('/perusahaanDelete', [PerusahaanController::class, 'postPerusahaanDelete']);
     Route::post('/contact', [PerusahaanController::class, 'postContact']);
+    Route::post('/contactDelete', [PerusahaanController::class, 'postContactDelete']);
+    
     Route::post('/social_media', [PerusahaanController::class, 'postSocialMedia']);
+    
+    Route::post('/social_mediaDelete', [PerusahaanController::class, 'postSocialMediaDelete']);
+    
     Route::post('/detailFooter', [PerusahaanController::class, 'postDetailFooter']);
+    Route::post('/footerDelete', [PerusahaanController::class, 'postFooterDelete']);
 });
 
 Route::prefix('/postLaporan')->group(function ()
 {
     Route::post('/laporan', [LaporanController::class, 'postLaporan']);
+    Route::post('/laporanDelete', [LaporanController::class, 'postLaporanDelete']);
 });

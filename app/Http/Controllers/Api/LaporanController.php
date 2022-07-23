@@ -26,4 +26,13 @@ class LaporanController extends Controller
             return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
         }
     }
+
+    public function postLaporanDelete(Request $request)
+    {
+        try {
+            laporan::destroy($request->id);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
+        }
+    }
 }

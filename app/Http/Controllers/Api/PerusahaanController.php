@@ -86,4 +86,44 @@ class PerusahaanController extends Controller
             return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
         }
     }
+
+    public function postPerusahaanDelete(Request $request)
+    {
+        try {
+            $perusahaan = perusahaan_detail::find($request->id);
+            $perusahaan->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
+        }
+    }
+
+    public function postContactDelete(Request $request)
+    {
+        try {
+            $contact = contact::find($request->id);
+            $contact->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
+        }
+    }
+
+    public function postSocialMediaDelete(Request $request)
+    {
+        try {
+            $social_media = social_media::find($request->id);
+            $social_media->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
+        }
+    }
+
+    public function postFooterDelete(Request $request)
+    {
+        try {
+            $footer_desc = footer_desc::find($request->id);
+            $footer_desc->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
+        }
+    }
 }

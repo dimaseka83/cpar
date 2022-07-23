@@ -16,6 +16,7 @@ import OurOfferAdmin from './PageAdmin/OurOfferAdmin.vue';
 import OurProductsAdmin from './PageAdmin/OurProductsAdmin.vue';
 import QualityAdmin from './PageAdmin/QualityAdmin.vue';
 import LaporanAdmin from './PageAdmin/LaporanAdmin.vue';
+import PerusahaanAdmin from './PageAdmin/PerusahaanAdmin.vue';
 // Login
 import Login from './auth/Login.vue';
 
@@ -39,6 +40,7 @@ const routes = [
     { path: '/admin/our-products', component: OurProductsAdmin, name: 'OurProductsadmin' },
     { path: '/admin/quality', component: QualityAdmin, name: 'Qualityadmin' },
     { path: '/admin/laporan', component: LaporanAdmin, name: 'Laporanadmin' },
+    { path: '/admin/perusahaan', component: PerusahaanAdmin, name: 'Perusahaanadmin' },
 ]
 
 const router = new VueRouter({
