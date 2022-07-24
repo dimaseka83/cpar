@@ -69,7 +69,7 @@ export default {
         async login() {
             this.$refs.form.validate();
             if (this.valid) {
-              await axios.post('/api/login', this.form).then(response => {
+                await axios.post('api/login', this.form).then(response => {
                 if (response.data.success) {
                     this.$router.push('/admin');
                     this.$store.dispatch('setDataUser', response.data.user);

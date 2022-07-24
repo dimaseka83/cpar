@@ -1,6 +1,13 @@
  <template>
      <v-app>
-         <v-card class="my-16">
+         <NavAdminVue />
+         <div v-if="users == null">
+             <p class="my-16">Silahkan Login Terlebih Dahulu. <router-link :to="{ name: 'login' }">Klik disini untuk
+                     login
+                 </router-link>
+             </p>
+         </div>
+         <v-card class="my-16" v-else>
              <v-data-table :headers="headersmission" :items="mission">
                  <template v-slot:item.action="data">
                      <v-tooltip bottom>
@@ -74,7 +81,8 @@
                              <v-card>
                                  <v-card-title>Create Slide</v-card-title>
                                  <v-card-text>
-                                     <v-text-field label="Mission Id" v-model="formmissioncontent.mission_id"></v-text-field>
+                                     <v-text-field label="Mission Id" v-model="formmissioncontent.mission_id">
+                                     </v-text-field>
                                      <v-text-field label="Text" v-model="formmissioncontent.text"></v-text-field>
                                  </v-card-text>
                                  <v-card-actions>
@@ -90,15 +98,11 @@
                  </template>
              </v-data-table>
              <v-data-table :headers="headersAboutCEO" :items="about_ceo">
-                <template v-slot:item.image="data">
-                    <v-img
-                        :src="'/images/about/about_ceo/'+data.item.image"
-                        :width="100"
-                        :height="100"
-                        class="mr-4"
-                    ></v-img>                    
-                </template>
-                <template v-slot:item.action="data">
+                 <template v-slot:item.image="data">
+                     <v-img :src="'/images/about/about_ceo/'+data.item.image" :width="100" :height="100" class="mr-4">
+                     </v-img>
+                 </template>
+                 <template v-slot:item.action="data">
                      <v-tooltip bottom>
                          <template v-slot:activator="{ on }">
                              <v-btn icon v-on="on" @click="editAboutCEO(data.index)">
@@ -130,8 +134,10 @@
                                      <v-text-field label="Title" v-model="formAboutCEO.title"></v-text-field>
                                      <v-text-field label="Subtitle" v-model="formAboutCEO.subtitle"></v-text-field>
                                      <v-text-field label="name ceo" v-model="formAboutCEO.name_ceo"></v-text-field>
-                                     <v-text-field label="position ceo" v-model="formAboutCEO.position_ceo"></v-text-field>
-                                    <v-file-input accept="image/*" v-model="formAboutCEO.image" label="Image"></v-file-input>
+                                     <v-text-field label="position ceo" v-model="formAboutCEO.position_ceo">
+                                     </v-text-field>
+                                     <v-file-input accept="image/*" v-model="formAboutCEO.image" label="Image">
+                                     </v-file-input>
                                  </v-card-text>
                                  <v-card-actions>
                                      <v-btn color="blue darken-1" text @click="dialogAboutCEO = false">Close</v-btn>
@@ -142,9 +148,9 @@
                          </v-dialog>
                      </v-toolbar>
                  </template>
-            </v-data-table>
+             </v-data-table>
              <v-data-table :headers="headersProduct" :items="product">
-                             <template v-slot:item.action="data">
+                 <template v-slot:item.action="data">
                      <v-tooltip bottom>
                          <template v-slot:activator="{ on }">
                              <v-btn icon v-on="on" @click="editProduct(data.index)">
@@ -187,7 +193,7 @@
                  </template>
              </v-data-table>
              <v-data-table :headers="headersPercentageProducts" :items="percentage_products">
-                                          <template v-slot:item.action="data">
+                 <template v-slot:item.action="data">
                      <v-tooltip bottom>
                          <template v-slot:activator="{ on }">
                              <v-btn icon v-on="on" @click="editPercentageProduct(data.index)">
@@ -216,21 +222,25 @@
                              <v-card>
                                  <v-card-title>Create Slide</v-card-title>
                                  <v-card-text>
-                                     <v-text-field label="Percentage" v-model="formPercentageProducts.percentage"></v-text-field>
-                                     <v-text-field label="Products" v-model="formPercentageProducts.products"></v-text-field>
+                                     <v-text-field label="Percentage" v-model="formPercentageProducts.percentage">
+                                     </v-text-field>
+                                     <v-text-field label="Products" v-model="formPercentageProducts.products">
+                                     </v-text-field>
                                  </v-card-text>
                                  <v-card-actions>
-                                     <v-btn color="blue darken-1" text @click="dialogPercentageProducts = false">Close</v-btn>
-                                     <v-btn color="blue darken-1" text @click="dialogPercentageProducts = false; createPercentageProduct()">
+                                     <v-btn color="blue darken-1" text @click="dialogPercentageProducts = false">Close
+                                     </v-btn>
+                                     <v-btn color="blue darken-1" text
+                                         @click="dialogPercentageProducts = false; createPercentageProduct()">
                                          Create</v-btn>
                                  </v-card-actions>
                              </v-card>
                          </v-dialog>
                      </v-toolbar>
                  </template>
-                </v-data-table>
+             </v-data-table>
              <v-data-table :headers="headersTeam" :items="team">
-                                                       <template v-slot:item.action="data">
+                 <template v-slot:item.action="data">
                      <v-tooltip bottom>
                          <template v-slot:activator="{ on }">
                              <v-btn icon v-on="on" @click="editTeam(data.index)">
@@ -273,15 +283,11 @@
                  </template>
              </v-data-table>
              <v-data-table :headers="headersTeamDetail" :items="team_detail">
-                <template v-slot:item.image="data">
-                    <v-img
-                        :src="'/images/about/team_detail/'+data.item.image"
-                        :width="100"
-                        :height="100"
-                        class="mr-4"
-                    ></v-img>                    
-                </template>
-                <template v-slot:item.action="data">
+                 <template v-slot:item.image="data">
+                     <v-img :src="'/images/about/team_detail/'+data.item.image" :width="100" :height="100" class="mr-4">
+                     </v-img>
+                 </template>
+                 <template v-slot:item.action="data">
                      <v-tooltip bottom>
                          <template v-slot:activator="{ on }">
                              <v-btn icon v-on="on" @click="editTeamdetail(data.index)">
@@ -312,11 +318,13 @@
                                  <v-card-text>
                                      <v-text-field label="Name" v-model="formTeamDetail.name"></v-text-field>
                                      <v-text-field label="Position" v-model="formTeamDetail.position"></v-text-field>
-                                    <v-file-input accept="image/*" v-model="formTeamDetail.image" label="Image"></v-file-input>
+                                     <v-file-input accept="image/*" v-model="formTeamDetail.image" label="Image">
+                                     </v-file-input>
                                  </v-card-text>
                                  <v-card-actions>
                                      <v-btn color="blue darken-1" text @click="dialogTeamDetail = false">Close</v-btn>
-                                     <v-btn color="blue darken-1" text @click="dialogTeamDetail = false; createTeamdetail()">
+                                     <v-btn color="blue darken-1" text
+                                         @click="dialogTeamDetail = false; createTeamdetail()">
                                          Create</v-btn>
                                  </v-card-actions>
                              </v-card>
@@ -329,7 +337,13 @@
      </v-app>
  </template>
  <script>
- export default {
+import NavAdminVue from '../components/NavAdmin.vue';
+import mix from '../mixins/mix.js';
+export default {
+    mixins: [mix],
+    components: {
+        NavAdminVue,
+    },
     data() {
         return {
             mission: [],

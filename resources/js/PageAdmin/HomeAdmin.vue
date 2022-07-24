@@ -1,14 +1,17 @@
 <template>
     <v-app>
-        <v-card class="my-16">
+        <NavAdminVue />
+        <div v-if="users == null">
+            <p class="my-16">Silahkan Login Terlebih Dahulu. <router-link :to="{ name: 'login' }">Klik disini untuk
+                    login
+                </router-link>
+            </p>
+        </div>
+        <v-card class="my-16" v-else>
             <v-data-table :headers="headerslides" :items="slides">
                 <template v-slot:item.image="data">
-                    <v-img
-                        :src="'/images/home/slides/'+data.item.image"
-                        :width="100"
-                        :height="100"
-                        class="mr-4"
-                    ></v-img>                    
+                    <v-img :src="'/images/home/slides/'+data.item.image" :width="100" :height="100" class="mr-4">
+                    </v-img>
                 </template>
                 <template v-slot:item.actions="data">
                     <v-tooltip bottom>
@@ -42,11 +45,13 @@
                                 <v-card-text>
                                     <v-text-field label="Title" v-model="formslides.title"></v-text-field>
                                     <v-text-field label="Description" v-model="formslides.subtitle"></v-text-field>
-                                    <v-file-input accept="image/*" v-model="formslides.image" label="Image"></v-file-input>
+                                    <v-file-input accept="image/*" v-model="formslides.image" label="Image">
+                                    </v-file-input>
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogslide = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogslide = false; createHeaderSlide()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogslide = false; createHeaderSlide()">
+                                        Create</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -56,12 +61,8 @@
 
             <v-data-table :headers="headersimageslide" :items="images_slides">
                 <template v-slot:item.image="data">
-                    <v-img
-                        :src="'/images/home/images_slides/'+data.item.image"
-                        :width="100"
-                        :height="100"
-                        class="mr-4"
-                    ></v-img>                    
+                    <v-img :src="'/images/home/images_slides/'+data.item.image" :width="100" :height="100" class="mr-4">
+                    </v-img>
                 </template>
                 <template v-slot:item.actions="data">
                     <v-tooltip bottom>
@@ -93,11 +94,13 @@
                             <v-card>
                                 <v-card-title>Create Slide</v-card-title>
                                 <v-card-text>
-                                    <v-file-input accept="image/*" v-model="formimageslide.image" label="Image"></v-file-input>
+                                    <v-file-input accept="image/*" v-model="formimageslide.image" label="Image">
+                                    </v-file-input>
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogimageslide = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogimageslide = false; createImageSlide()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text
+                                        @click="dialogimageslide = false; createImageSlide()">Create</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -140,7 +143,8 @@
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogpage2 = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogpage2 = false; createPage2()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogpage2 = false; createPage2()">Create
+                                    </v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -150,12 +154,7 @@
 
             <v-data-table :headers="headerpage3" :items="page3">
                 <template v-slot:item.image="data">
-                    <v-img
-                        :src="'/images/home/page3/'+data.item.image"
-                        :width="100"
-                        :height="100"
-                        class="mr-4"
-                    ></v-img>                    
+                    <v-img :src="'/images/home/page3/'+data.item.image" :width="100" :height="100" class="mr-4"></v-img>
                 </template>
                 <template v-slot:item.actions="data">
                     <v-tooltip bottom>
@@ -189,11 +188,13 @@
                                 <v-card-text>
                                     <v-text-field label="Title" v-model="formpage3.title"></v-text-field>
                                     <v-text-field label="Description" v-model="formpage3.subtitle"></v-text-field>
-                                    <v-file-input accept="image/*" v-model="formpage3.image" label="Image"></v-file-input>
+                                    <v-file-input accept="image/*" v-model="formpage3.image" label="Image">
+                                    </v-file-input>
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogpage3 = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogpage3 = false; createPage3()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogpage3 = false; createPage3()">Create
+                                    </v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -203,7 +204,7 @@
 
             <v-data-table :headers="headersubpage3" :items="sub_page3">
                 <template v-slot:item.icon="data">
-                    <v-icon>{{ data.item.icon }}</v-icon>               
+                    <v-icon>{{ data.item.icon }}</v-icon>
                 </template>
                 <template v-slot:item.actions="data">
                     <v-tooltip bottom>
@@ -241,7 +242,8 @@
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogsubpage3 = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogsubpage3 = false; createSubPage3()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogsubpage3 = false; createSubPage3()">
+                                        Create</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -286,7 +288,8 @@
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogpage4 = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogpage4 = false; createPage4()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogpage4 = false; createPage4()">Create
+                                    </v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -295,8 +298,8 @@
             </v-data-table>
 
             <v-data-table :headers="headerservices" :items="services">
-                 <template v-slot:item.icon="data">
-                    <v-icon>{{ data.item.icon }}</v-icon>               
+                <template v-slot:item.icon="data">
+                    <v-icon>{{ data.item.icon }}</v-icon>
                 </template>
                 <template v-slot:item.actions="data">
                     <v-tooltip bottom>
@@ -334,7 +337,8 @@
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogservices = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogservices = false; createServices()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogservices = false; createServices()">
+                                        Create</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -343,8 +347,8 @@
             </v-data-table>
 
             <v-data-table :headers="headerprogress" :items="progress">
-                 <template v-slot:item.icon="data">
-                    <v-icon>{{ data.item.icon }}</v-icon>               
+                <template v-slot:item.icon="data">
+                    <v-icon>{{ data.item.icon }}</v-icon>
                 </template>
                 <template v-slot:item.actions="data">
                     <v-tooltip bottom>
@@ -382,7 +386,8 @@
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogprogress = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogprogress = false; createProgress()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogprogress = false; createProgress()">
+                                        Create</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -391,8 +396,8 @@
             </v-data-table>
 
             <v-data-table :headers="headerpage5" :items="page5">
-                 <template v-slot:item.icon="data">
-                    <v-icon>{{ data.item.icon }}</v-icon>               
+                <template v-slot:item.icon="data">
+                    <v-icon>{{ data.item.icon }}</v-icon>
                 </template>
                 <template v-slot:item.actions="data">
                     <v-tooltip bottom>
@@ -429,7 +434,8 @@
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogpage5 = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogpage5 = false; createPage5()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogpage5 = false; createPage5()">Create
+                                    </v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -438,8 +444,8 @@
             </v-data-table>
 
             <v-data-table :headers="headersubpage5" :items="sub_page5">
-                 <template v-slot:item.icon="data">
-                    <v-icon>{{ data.item.icon }}</v-icon>               
+                <template v-slot:item.icon="data">
+                    <v-icon>{{ data.item.icon }}</v-icon>
                 </template>
                 <template v-slot:item.actions="data">
                     <v-tooltip bottom>
@@ -477,7 +483,8 @@
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogsubpage5 = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogsubpage5 = false; createSubPage5()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogsubpage5 = false; createSubPage5()">
+                                        Create</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -486,8 +493,8 @@
             </v-data-table>
 
             <v-data-table :headers="headerpage6" :items="page6">
-                 <template v-slot:item.icon="data">
-                    <v-icon>{{ data.item.icon }}</v-icon>               
+                <template v-slot:item.icon="data">
+                    <v-icon>{{ data.item.icon }}</v-icon>
                 </template>
                 <template v-slot:item.actions="data">
                     <v-tooltip bottom>
@@ -523,7 +530,8 @@
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogpage6 = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogpage6 = false; createPage6()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogpage6 = false; createPage6()">Create
+                                    </v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -533,12 +541,8 @@
 
             <v-data-table :headers="headersubpage6" :items="sub_page6">
                 <template v-slot:item.image="data">
-                    <v-img
-                        :src="'/images/home/subpage6/'+data.item.image"
-                        :width="100"
-                        :height="100"
-                        class="mr-4"
-                    ></v-img>                    
+                    <v-img :src="'/images/home/subpage6/'+data.item.image" :width="100" :height="100" class="mr-4">
+                    </v-img>
                 </template>
                 <template v-slot:item.actions="data">
                     <v-tooltip bottom>
@@ -572,12 +576,15 @@
                                 <v-card-text>
                                     <v-text-field label="Title" v-model="formsubpage6.title"></v-text-field>
                                     <v-text-field label="People Name" v-model="formsubpage6.people_name"></v-text-field>
-                                    <v-text-field label="People Position" v-model="formsubpage6.people_position"></v-text-field>
-                                    <v-file-input accept="image/*" v-model="formsubpage6.image" label="Image"></v-file-input>
+                                    <v-text-field label="People Position" v-model="formsubpage6.people_position">
+                                    </v-text-field>
+                                    <v-file-input accept="image/*" v-model="formsubpage6.image" label="Image">
+                                    </v-file-input>
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogsubpage6 = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogsubpage6 = false; createSubPage6()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogsubpage6 = false; createSubPage6()">
+                                        Create</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -621,7 +628,8 @@
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogpage7 = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogpage7 = false; createPage7()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogpage7 = false; createPage7()">Create
+                                    </v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -631,12 +639,7 @@
 
             <v-data-table :headers="headernews" :items="news">
                 <template v-slot:item.image="data">
-                    <v-img
-                        :src="'/images/home/news/'+data.item.image"
-                        :width="100"
-                        :height="100"
-                        class="mr-4"
-                    ></v-img>                    
+                    <v-img :src="'/images/home/news/'+data.item.image" :width="100" :height="100" class="mr-4"></v-img>
                 </template>
                 <template v-slot:item.actions="data">
                     <v-tooltip bottom>
@@ -672,50 +675,30 @@
                                     <v-text-field label="Title" v-model="formnews.title"></v-text-field>
                                     <v-text-field label="Subtitle" v-model="formnews.subtitle"></v-text-field>
                                     <v-text-field label="Category News" v-model="formnews.category_news"></v-text-field>
-                                    <v-menu
-        ref="menu2"
-        v-model="menu2"
-        transition="scale-transition"
-        offset-y
-        min-width="auto"
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-text-field
-            v-model="formnews.date"
-            label="Picker in menu"
-            prepend-icon="mdi-calendar"
-            readonly
-            v-bind="attrs"
-            v-on="on"
-          ></v-text-field>
-        </template>
-        <v-date-picker
-          v-model="formnews.date"
-          no-title
-          scrollable
-        >
-          <v-spacer></v-spacer>
-          <v-btn
-            text
-            color="primary"
-            @click="menu2 = false"
-          >
-            Cancel
-          </v-btn>
-          <v-btn
-            text
-            color="primary"
-            @click="$refs.menu2.save(date)"
-          >
-            OK
-          </v-btn>
-        </v-date-picker>
-      </v-menu>
-                                    <v-file-input accept="image/*" v-model="formnews.image" label="Image"></v-file-input>
+                                    <v-menu ref="menu2" v-model="menu2" transition="scale-transition" offset-y
+                                        min-width="auto">
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-text-field v-model="formnews.date" label="Picker in menu"
+                                                prepend-icon="mdi-calendar" readonly v-bind="attrs" v-on="on">
+                                            </v-text-field>
+                                        </template>
+                                        <v-date-picker v-model="formnews.date" no-title scrollable>
+                                            <v-spacer></v-spacer>
+                                            <v-btn text color="primary" @click="menu2 = false">
+                                                Cancel
+                                            </v-btn>
+                                            <v-btn text color="primary" @click="$refs.menu2.save(date)">
+                                                OK
+                                            </v-btn>
+                                        </v-date-picker>
+                                    </v-menu>
+                                    <v-file-input accept="image/*" v-model="formnews.image" label="Image">
+                                    </v-file-input>
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialognews = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialognews = false; createNews()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialognews = false; createNews()">Create
+                                    </v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -726,7 +709,13 @@
     </v-app>
 </template>
 <script>
+import NavAdminVue from '../components/NavAdmin.vue';
+import mix from '../mixins/mix.js';
 export default {
+    mixins: [mix],
+    components: {
+        NavAdminVue,
+    },
     data() {
         return {
                 loading: true,

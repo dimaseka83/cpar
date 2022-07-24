@@ -1,6 +1,13 @@
 <template>
     <v-app>
-        <v-card class="my-16">
+        <NavAdminVue />
+        <div v-if="users == null">
+            <p class="my-16">Silahkan Login Terlebih Dahulu. <router-link :to="{ name: 'login' }">Klik disini untuk
+                    login
+                </router-link>
+            </p>
+        </div>
+        <v-card class="my-16" v-else>
             <v-data-table :headers="headerCategory" :items="category">
                 <template v-slot:item.action="data">
                     <v-tooltip bottom>
@@ -77,8 +84,10 @@
                             <v-card>
                                 <v-card-title>Create Slide</v-card-title>
                                 <v-card-text>
-                                    <v-text-field v-model="formProducts.name_prod" label="Name Produksi" required></v-text-field>
-                                    <v-text-field v-model="formProducts.desc_prod" label="Description" required></v-text-field>
+                                    <v-text-field v-model="formProducts.name_prod" label="Name Produksi" required>
+                                    </v-text-field>
+                                    <v-text-field v-model="formProducts.desc_prod" label="Description" required>
+                                    </v-text-field>
                                     <v-text-field v-model="formProducts.category_id" label="Category Id" required>
                                     </v-text-field>
                                     <v-file-input accept="image/*" v-model="formProducts.img_prod" label="Image">
@@ -99,7 +108,13 @@
     </v-app>
 </template>
 <script>
+import NavAdminVue from '../components/NavAdmin.vue';
+import mix from '../mixins/mix.js';
 export default {
+    mixins: [mix],
+    components: {
+        NavAdminVue,
+    },
     data() {
         return {
             category: [],

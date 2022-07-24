@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\LaporanController;
 use App\Http\Controllers\Api\QualityController;
 use App\Http\Controllers\Api\ContactsController;
+use App\Http\Controllers\Api\Login\LoginController;
 use App\Http\Controllers\Api\PerusahaanController;
 use App\Http\Controllers\Api\OurProductsController;
 
@@ -25,7 +26,6 @@ use App\Http\Controllers\Api\OurProductsController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 // Home
 Route::prefix('/postHome')->group(function ()
 {

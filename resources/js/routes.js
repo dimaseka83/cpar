@@ -17,12 +17,13 @@ import OurProductsAdmin from './PageAdmin/OurProductsAdmin.vue';
 import QualityAdmin from './PageAdmin/QualityAdmin.vue';
 import LaporanAdmin from './PageAdmin/LaporanAdmin.vue';
 import PerusahaanAdmin from './PageAdmin/PerusahaanAdmin.vue';
+import ChangePassword from './PageAdmin/ChangePassword.vue';
 // Login
 import Login from './auth/Login.vue';
 
 const routes = [
     // Login
-    { path: '/login', component: Login },
+    { path: '/login', component: Login, name: 'login' },
     // Frontend
     { path: '/', component: Home, name: 'home' },
     { path: '/about', component: About, name: 'about' },
@@ -41,6 +42,7 @@ const routes = [
     { path: '/admin/quality', component: QualityAdmin, name: 'Qualityadmin' },
     { path: '/admin/laporan', component: LaporanAdmin, name: 'Laporanadmin' },
     { path: '/admin/perusahaan', component: PerusahaanAdmin, name: 'Perusahaanadmin' },
+    { path: '/admin/change-password', component: ChangePassword, name: 'ChangePassword' },
 ]
 
 const router = new VueRouter({

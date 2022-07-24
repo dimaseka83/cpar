@@ -1,444 +1,470 @@
 <template>
     <v-app>
-        <v-card class="my-16">
+        <NavAdminVue />
+        <div v-if="users == null">
+            <p class="my-16">Silahkan Login Terlebih Dahulu. <router-link :to="{ name: 'login' }">Klik disini untuk
+                    login
+                </router-link>
+            </p>
+        </div>
+        <v-card class="my-16" v-else>
             <v-data-table :headers="headersofficeinf" :items="officeinf">
                 <template v-slot:item.action="data">
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="editofficeinf(data.index)">
-                                 <v-icon>mdi-pencil</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Edit</span>
-                     </v-tooltip>
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="hapusofficeinf(data.index)">
-                                 <v-icon>mdi-delete</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Delete</span>
-                     </v-tooltip>
-                 </template>
-                 <template v-slot:top>
-                     <v-toolbar flat>
-                         <v-toolbar-title>Office Info </v-toolbar-title>
-                         <v-spacer></v-spacer>
-                         <v-dialog v-model="dialogofficeinf" max-width="500px">
-                             <template v-slot:activator="{ on, attrs}">
-                                 <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
-                             </template>
-                             <v-card>
-                                 <v-card-title>Create Slide</v-card-title>
-                                 <v-card-text>
-                                     <v-text-field label="Title" v-model="formofficeinf.title"></v-text-field>
-                                     <v-text-field label="Title Address" v-model="formofficeinf.title_addr"></v-text-field>
-                                     <v-text-field label="Phone Address" v-model="formofficeinf.phone_title"></v-text-field>
-                                     <v-text-field label="Office Name" v-model="formofficeinf.office_name"></v-text-field>
-                                     <v-text-field label="Address" v-model="formofficeinf.addr"></v-text-field>
-                                 </v-card-text>
-                                 <v-card-actions>
-                                     <v-btn color="blue darken-1" text @click="dialogofficeinf = false">Close</v-btn>
-                                     <v-btn color="blue darken-1" text @click="dialogofficeinf = false; createofficeinf()">
-                                         Create</v-btn>
-                                 </v-card-actions>
-                             </v-card>
-                         </v-dialog>
-                     </v-toolbar>
-                 </template>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editofficeinf(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapusofficeinf(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
+                <template v-slot:top>
+                    <v-toolbar flat>
+                        <v-toolbar-title>Office Info </v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-dialog v-model="dialogofficeinf" max-width="500px">
+                            <template v-slot:activator="{ on, attrs}">
+                                <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
+                            </template>
+                            <v-card>
+                                <v-card-title>Create Slide</v-card-title>
+                                <v-card-text>
+                                    <v-text-field label="Title" v-model="formofficeinf.title"></v-text-field>
+                                    <v-text-field label="Title Address" v-model="formofficeinf.title_addr">
+                                    </v-text-field>
+                                    <v-text-field label="Phone Address" v-model="formofficeinf.phone_title">
+                                    </v-text-field>
+                                    <v-text-field label="Office Name" v-model="formofficeinf.office_name">
+                                    </v-text-field>
+                                    <v-text-field label="Address" v-model="formofficeinf.addr"></v-text-field>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-btn color="blue darken-1" text @click="dialogofficeinf = false">Close</v-btn>
+                                    <v-btn color="blue darken-1" text
+                                        @click="dialogofficeinf = false; createofficeinf()">
+                                        Create</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                    </v-toolbar>
+                </template>
             </v-data-table>
             <v-data-table :headers="headerscompanyinf" :items="companyinf">
                 <template v-slot:item.action="data">
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="editcompanyinf(data.index)">
-                                 <v-icon>mdi-pencil</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Edit</span>
-                     </v-tooltip>
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="hapuscompanyinf(data.index)">
-                                 <v-icon>mdi-delete</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Delete</span>
-                     </v-tooltip>
-                 </template>
-                 <template v-slot:top>
-                     <v-toolbar flat>
-                         <v-toolbar-title>Company Info </v-toolbar-title>
-                         <v-spacer></v-spacer>
-                         <v-dialog v-model="dialogcompanyinf" max-width="500px">
-                             <template v-slot:activator="{ on, attrs}">
-                                 <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
-                             </template>
-                             <v-card>
-                                 <v-card-title>Create Slide</v-card-title>
-                                 <v-card-text>
-                                     <v-text-field label="Title" v-model="formcompanyinf.title"></v-text-field>
-                                     <v-text-field label="Title Additional" v-model="formcompanyinf.title_additional"></v-text-field>
-                                     <v-text-field label="Title Databox" v-model="formcompanyinf.title_databox"></v-text-field>
-                                     <v-text-field label="Title Reg" v-model="formcompanyinf.title_reg"></v-text-field>
-                                     <v-text-field label="Title Vat" v-model="formcompanyinf.title_vat"></v-text-field>
-                                 </v-card-text>
-                                 <v-card-actions>
-                                     <v-btn color="blue darken-1" text @click="dialogcompanyinf = false">Close</v-btn>
-                                     <v-btn color="blue darken-1" text @click="dialogcompanyinf = false; createcompanyinf()">
-                                         Create</v-btn>
-                                 </v-card-actions>
-                             </v-card>
-                         </v-dialog>
-                     </v-toolbar>
-                 </template>
-                </v-data-table>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editcompanyinf(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapuscompanyinf(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
+                <template v-slot:top>
+                    <v-toolbar flat>
+                        <v-toolbar-title>Company Info </v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-dialog v-model="dialogcompanyinf" max-width="500px">
+                            <template v-slot:activator="{ on, attrs}">
+                                <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
+                            </template>
+                            <v-card>
+                                <v-card-title>Create Slide</v-card-title>
+                                <v-card-text>
+                                    <v-text-field label="Title" v-model="formcompanyinf.title"></v-text-field>
+                                    <v-text-field label="Title Additional" v-model="formcompanyinf.title_additional">
+                                    </v-text-field>
+                                    <v-text-field label="Title Databox" v-model="formcompanyinf.title_databox">
+                                    </v-text-field>
+                                    <v-text-field label="Title Reg" v-model="formcompanyinf.title_reg"></v-text-field>
+                                    <v-text-field label="Title Vat" v-model="formcompanyinf.title_vat"></v-text-field>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-btn color="blue darken-1" text @click="dialogcompanyinf = false">Close</v-btn>
+                                    <v-btn color="blue darken-1" text
+                                        @click="dialogcompanyinf = false; createcompanyinf()">
+                                        Create</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                    </v-toolbar>
+                </template>
+            </v-data-table>
             <v-data-table :headers="headersbillinginf" :items="billinginf">
                 <template v-slot:item.action="data">
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="editbillinginf(data.index)">
-                                 <v-icon>mdi-pencil</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Edit</span>
-                     </v-tooltip>
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="hapusbillinginf(data.index)">
-                                 <v-icon>mdi-delete</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Delete</span>
-                     </v-tooltip>
-                 </template>
-                 <template v-slot:top>
-                     <v-toolbar flat>
-                         <v-toolbar-title>Billing Info </v-toolbar-title>
-                         <v-spacer></v-spacer>
-                         <v-dialog v-model="dialogbillinginf" max-width="500px">
-                             <template v-slot:activator="{ on, attrs}">
-                                 <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
-                             </template>
-                             <v-card>
-                                 <v-card-title>Create Slide</v-card-title>
-                                 <v-card-text>
-                                     <v-text-field label="Title" v-model="formbillinginf.title"></v-text-field>
-                                     <v-text-field label="Title Reg" v-model="formbillinginf.title_reg"></v-text-field>
-                                 </v-card-text>
-                                 <v-card-actions>
-                                     <v-btn color="blue darken-1" text @click="dialogbillinginf = false">Close</v-btn>
-                                     <v-btn color="blue darken-1" text @click="dialogbillinginf = false; createbillinginf()">
-                                         Create</v-btn>
-                                 </v-card-actions>
-                             </v-card>
-                         </v-dialog>
-                     </v-toolbar>
-                 </template>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editbillinginf(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapusbillinginf(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
+                <template v-slot:top>
+                    <v-toolbar flat>
+                        <v-toolbar-title>Billing Info </v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-dialog v-model="dialogbillinginf" max-width="500px">
+                            <template v-slot:activator="{ on, attrs}">
+                                <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
+                            </template>
+                            <v-card>
+                                <v-card-title>Create Slide</v-card-title>
+                                <v-card-text>
+                                    <v-text-field label="Title" v-model="formbillinginf.title"></v-text-field>
+                                    <v-text-field label="Title Reg" v-model="formbillinginf.title_reg"></v-text-field>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-btn color="blue darken-1" text @click="dialogbillinginf = false">Close</v-btn>
+                                    <v-btn color="blue darken-1" text
+                                        @click="dialogbillinginf = false; createbillinginf()">
+                                        Create</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                    </v-toolbar>
+                </template>
             </v-data-table>
             <v-data-table :headers="headersregistration" :items="registration">
                 <template v-slot:item.action="data">
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="editregistration(data.index)">
-                                 <v-icon>mdi-pencil</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Edit</span>
-                     </v-tooltip>
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="hapusregistration(data.index)">
-                                 <v-icon>mdi-delete</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Delete</span>
-                     </v-tooltip>
-                 </template>
-                 <template v-slot:top>
-                     <v-toolbar flat>
-                         <v-toolbar-title>Registration Info </v-toolbar-title>
-                         <v-spacer></v-spacer>
-                         <v-dialog v-model="dialogregistration" max-width="500px">
-                             <template v-slot:activator="{ on, attrs}">
-                                 <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
-                             </template>
-                             <v-card>
-                                 <v-card-title>Create Slide</v-card-title>
-                                 <v-card-text>
-                                     <v-text-field label="Title Registration" v-model="formregistration.registration"></v-text-field>
-                                 </v-card-text>
-                                 <v-card-actions>
-                                     <v-btn color="blue darken-1" text @click="dialogregistration = false">Close</v-btn>
-                                     <v-btn color="blue darken-1" text @click="dialogregistration = false; createregistration()">
-                                         Create</v-btn>
-                                 </v-card-actions>
-                             </v-card>
-                         </v-dialog>
-                     </v-toolbar>
-                 </template>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editregistration(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapusregistration(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
+                <template v-slot:top>
+                    <v-toolbar flat>
+                        <v-toolbar-title>Registration Info </v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-dialog v-model="dialogregistration" max-width="500px">
+                            <template v-slot:activator="{ on, attrs}">
+                                <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
+                            </template>
+                            <v-card>
+                                <v-card-title>Create Slide</v-card-title>
+                                <v-card-text>
+                                    <v-text-field label="Title Registration" v-model="formregistration.registration">
+                                    </v-text-field>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-btn color="blue darken-1" text @click="dialogregistration = false">Close</v-btn>
+                                    <v-btn color="blue darken-1" text
+                                        @click="dialogregistration = false; createregistration()">
+                                        Create</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                    </v-toolbar>
+                </template>
             </v-data-table>
             <v-data-table :headers="headersvat" :items="vat">
-                            <template v-slot:item.action="data">
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="editvat(data.index)">
-                                 <v-icon>mdi-pencil</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Edit</span>
-                     </v-tooltip>
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="hapusvat(data.index)">
-                                 <v-icon>mdi-delete</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Delete</span>
-                     </v-tooltip>
-                 </template>
-                 <template v-slot:top>
-                     <v-toolbar flat>
-                         <v-toolbar-title>Vat Info </v-toolbar-title>
-                         <v-spacer></v-spacer>
-                         <v-dialog v-model="dialogvat" max-width="500px">
-                             <template v-slot:activator="{ on, attrs}">
-                                 <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
-                             </template>
-                             <v-card>
-                                 <v-card-title>Create Slide</v-card-title>
-                                 <v-card-text>
-                                     <v-text-field label="Title" v-model="formvat.title"></v-text-field>
-                                     <v-text-field label="Text" v-model="formvat.text"></v-text-field>
-                                 </v-card-text>
-                                 <v-card-actions>
-                                     <v-btn color="blue darken-1" text @click="dialogvat = false">Close</v-btn>
-                                     <v-btn color="blue darken-1" text @click="dialogvat = false; createvat()">
-                                         Create</v-btn>
-                                 </v-card-actions>
-                             </v-card>
-                         </v-dialog>
-                     </v-toolbar>
-                 </template>
+                <template v-slot:item.action="data">
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editvat(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapusvat(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
+                <template v-slot:top>
+                    <v-toolbar flat>
+                        <v-toolbar-title>Vat Info </v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-dialog v-model="dialogvat" max-width="500px">
+                            <template v-slot:activator="{ on, attrs}">
+                                <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
+                            </template>
+                            <v-card>
+                                <v-card-title>Create Slide</v-card-title>
+                                <v-card-text>
+                                    <v-text-field label="Title" v-model="formvat.title"></v-text-field>
+                                    <v-text-field label="Text" v-model="formvat.text"></v-text-field>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-btn color="blue darken-1" text @click="dialogvat = false">Close</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogvat = false; createvat()">
+                                        Create</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                    </v-toolbar>
+                </template>
             </v-data-table>
             <v-data-table :headers="headersdatabox" :items="databox">
                 <template v-slot:item.action="data">
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="editdatabox(data.index)">
-                                 <v-icon>mdi-pencil</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Edit</span>
-                     </v-tooltip>
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="hapusdatabox(data.index)">
-                                 <v-icon>mdi-delete</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Delete</span>
-                     </v-tooltip>
-                 </template>
-                 <template v-slot:top>
-                     <v-toolbar flat>
-                         <v-toolbar-title>Databox Info </v-toolbar-title>
-                         <v-spacer></v-spacer>
-                         <v-dialog v-model="dialogdatabox" max-width="500px">
-                             <template v-slot:activator="{ on, attrs}">
-                                 <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
-                             </template>
-                             <v-card>
-                                 <v-card-title>Create Slide</v-card-title>
-                                 <v-card-text>
-                                     <v-text-field label="Title Databox" v-model="formdatabox.databox"></v-text-field>
-                                 </v-card-text>
-                                 <v-card-actions>
-                                     <v-btn color="blue darken-1" text @click="dialogdatabox = false">Close</v-btn>
-                                     <v-btn color="blue darken-1" text @click="dialogdatabox = false; createdatabox()">
-                                         Create</v-btn>
-                                 </v-card-actions>
-                             </v-card>
-                         </v-dialog>
-                     </v-toolbar>
-                 </template>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editdatabox(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapusdatabox(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
+                <template v-slot:top>
+                    <v-toolbar flat>
+                        <v-toolbar-title>Databox Info </v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-dialog v-model="dialogdatabox" max-width="500px">
+                            <template v-slot:activator="{ on, attrs}">
+                                <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
+                            </template>
+                            <v-card>
+                                <v-card-title>Create Slide</v-card-title>
+                                <v-card-text>
+                                    <v-text-field label="Title Databox" v-model="formdatabox.databox"></v-text-field>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-btn color="blue darken-1" text @click="dialogdatabox = false">Close</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogdatabox = false; createdatabox()">
+                                        Create</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                    </v-toolbar>
+                </template>
             </v-data-table>
             <v-data-table :headers="headersAdditional" :items="additional">
                 <template v-slot:item.action="data">
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="editadditional(data.index)">
-                                 <v-icon>mdi-pencil</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Edit</span>
-                     </v-tooltip>
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="hapusadditional(data.index)">
-                                 <v-icon>mdi-delete</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Delete</span>
-                     </v-tooltip>
-                 </template>
-                 <template v-slot:top>
-                     <v-toolbar flat>
-                         <v-toolbar-title>Additional Info </v-toolbar-title>
-                         <v-spacer></v-spacer>
-                         <v-dialog v-model="dialogadditional" max-width="500px">
-                             <template v-slot:activator="{ on, attrs}">
-                                 <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
-                             </template>
-                             <v-card>
-                                 <v-card-title>Create Slide</v-card-title>
-                                 <v-card-text>
-                                     <v-text-field label="Title Additional" v-model="formadditional.additional"></v-text-field>
-                                 </v-card-text>
-                                 <v-card-actions>
-                                     <v-btn color="blue darken-1" text @click="dialogadditional = false">Close</v-btn>
-                                     <v-btn color="blue darken-1" text @click="dialogadditional = false; createadditional()">
-                                         Create</v-btn>
-                                 </v-card-actions>
-                             </v-card>
-                         </v-dialog>
-                     </v-toolbar>
-                 </template>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editadditional(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapusadditional(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
+                <template v-slot:top>
+                    <v-toolbar flat>
+                        <v-toolbar-title>Additional Info </v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-dialog v-model="dialogadditional" max-width="500px">
+                            <template v-slot:activator="{ on, attrs}">
+                                <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
+                            </template>
+                            <v-card>
+                                <v-card-title>Create Slide</v-card-title>
+                                <v-card-text>
+                                    <v-text-field label="Title Additional" v-model="formadditional.additional">
+                                    </v-text-field>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-btn color="blue darken-1" text @click="dialogadditional = false">Close</v-btn>
+                                    <v-btn color="blue darken-1" text
+                                        @click="dialogadditional = false; createadditional()">
+                                        Create</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                    </v-toolbar>
+                </template>
             </v-data-table>
             <v-data-table :headers="headersphone" :items="phone">
-                            <template v-slot:item.action="data">
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="editphone(data.index)">
-                                 <v-icon>mdi-pencil</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Edit</span>
-                     </v-tooltip>
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="hapusphone(data.index)">
-                                 <v-icon>mdi-delete</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Delete</span>
-                     </v-tooltip>
-                 </template>
-                 <template v-slot:top>
-                     <v-toolbar flat>
-                         <v-toolbar-title>Header Phone</v-toolbar-title>
-                         <v-spacer></v-spacer>
-                         <v-dialog v-model="dialogphone" max-width="500px">
-                             <template v-slot:activator="{ on, attrs}">
-                                 <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
-                             </template>
-                             <v-card>
-                                 <v-card-title>Create Slide</v-card-title>
-                                 <v-card-text>
-                                     <v-text-field label="Number" v-model="formphone.number"></v-text-field>
-                                     <v-text-field label="Title" v-model="formphone.title"></v-text-field>
-                                 </v-card-text>
-                                 <v-card-actions>
-                                     <v-btn color="blue darken-1" text @click="dialogphone = false">Close</v-btn>
-                                     <v-btn color="blue darken-1" text @click="dialogphone = false; createphone()">
-                                         Create</v-btn>
-                                 </v-card-actions>
-                             </v-card>
-                         </v-dialog>
-                     </v-toolbar>
-                 </template>
+                <template v-slot:item.action="data">
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editphone(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapusphone(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
+                <template v-slot:top>
+                    <v-toolbar flat>
+                        <v-toolbar-title>Header Phone</v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-dialog v-model="dialogphone" max-width="500px">
+                            <template v-slot:activator="{ on, attrs}">
+                                <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
+                            </template>
+                            <v-card>
+                                <v-card-title>Create Slide</v-card-title>
+                                <v-card-text>
+                                    <v-text-field label="Number" v-model="formphone.number"></v-text-field>
+                                    <v-text-field label="Title" v-model="formphone.title"></v-text-field>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-btn color="blue darken-1" text @click="dialogphone = false">Close</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogphone = false; createphone()">
+                                        Create</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                    </v-toolbar>
+                </template>
             </v-data-table>
             <v-data-table :headers="headersname_bank" :items="name_bank">
-                                        <template v-slot:item.action="data">
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="editnamebank(data.index)">
-                                 <v-icon>mdi-pencil</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Edit</span>
-                     </v-tooltip>
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="hapusnamebank(data.index)">
-                                 <v-icon>mdi-delete</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Delete</span>
-                     </v-tooltip>
-                 </template>
-                 <template v-slot:top>
-                     <v-toolbar flat>
-                         <v-toolbar-title>Header Bank </v-toolbar-title>
-                         <v-spacer></v-spacer>
-                         <v-dialog v-model="dialogname_bank" max-width="500px">
-                             <template v-slot:activator="{ on, attrs}">
-                                 <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
-                             </template>
-                             <v-card>
-                                 <v-card-title>Create Slide</v-card-title>
-                                 <v-card-text>
-                                     <v-text-field label="Title" v-model="formname_bank.name_bank"></v-text-field>
-                                 </v-card-text>
-                                 <v-card-actions>
-                                     <v-btn color="blue darken-1" text @click="dialogname_bank = false">Close</v-btn>
-                                     <v-btn color="blue darken-1" text @click="dialogname_bank = false; createnamebank()">
-                                         Create</v-btn>
-                                 </v-card-actions>
-                             </v-card>
-                         </v-dialog>
-                     </v-toolbar>
-                 </template>
+                <template v-slot:item.action="data">
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editnamebank(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapusnamebank(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
+                <template v-slot:top>
+                    <v-toolbar flat>
+                        <v-toolbar-title>Header Bank </v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-dialog v-model="dialogname_bank" max-width="500px">
+                            <template v-slot:activator="{ on, attrs}">
+                                <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
+                            </template>
+                            <v-card>
+                                <v-card-title>Create Slide</v-card-title>
+                                <v-card-text>
+                                    <v-text-field label="Title" v-model="formname_bank.name_bank"></v-text-field>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-btn color="blue darken-1" text @click="dialogname_bank = false">Close</v-btn>
+                                    <v-btn color="blue darken-1" text
+                                        @click="dialogname_bank = false; createnamebank()">
+                                        Create</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                    </v-toolbar>
+                </template>
             </v-data-table>
             <v-data-table :headers="headerscontact_title" :items="contact_title">
                 <template v-slot:item.action="data">
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="editcontacttitle(data.index)">
-                                 <v-icon>mdi-pencil</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Edit</span>
-                     </v-tooltip>
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="hapuscontacttitle(data.index)">
-                                 <v-icon>mdi-delete</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Delete</span>
-                     </v-tooltip>
-                 </template>
-                 <template v-slot:top>
-                     <v-toolbar flat>
-                         <v-toolbar-title>Header Contact </v-toolbar-title>
-                         <v-spacer></v-spacer>
-                         <v-dialog v-model="dialogcontact_title" max-width="500px">
-                             <template v-slot:activator="{ on, attrs}">
-                                 <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
-                             </template>
-                             <v-card>
-                                 <v-card-title>Create Slide</v-card-title>
-                                 <v-card-text>
-                                     <v-text-field label="Text" v-model="formcontact_title.text"></v-text-field>
-                                     <v-text-field label="Title" v-model="formcontact_title.title"></v-text-field>
-                                 </v-card-text>
-                                 <v-card-actions>
-                                     <v-btn color="blue darken-1" text @click="dialogcontact_title = false">Close</v-btn>
-                                     <v-btn color="blue darken-1" text @click="dialogcontact_title = false; createcontacttitle()">
-                                         Create</v-btn>
-                                 </v-card-actions>
-                             </v-card>
-                         </v-dialog>
-                     </v-toolbar>
-                 </template>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editcontacttitle(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapuscontacttitle(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
+                <template v-slot:top>
+                    <v-toolbar flat>
+                        <v-toolbar-title>Header Contact </v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-dialog v-model="dialogcontact_title" max-width="500px">
+                            <template v-slot:activator="{ on, attrs}">
+                                <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Create</v-btn>
+                            </template>
+                            <v-card>
+                                <v-card-title>Create Slide</v-card-title>
+                                <v-card-text>
+                                    <v-text-field label="Text" v-model="formcontact_title.text"></v-text-field>
+                                    <v-text-field label="Title" v-model="formcontact_title.title"></v-text-field>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-btn color="blue darken-1" text @click="dialogcontact_title = false">Close</v-btn>
+                                    <v-btn color="blue darken-1" text
+                                        @click="dialogcontact_title = false; createcontacttitle()">
+                                        Create</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                    </v-toolbar>
+                </template>
             </v-data-table>
         </v-card>
     </v-app>
 </template>
 <script>
-
+import NavAdminVue from '../components/NavAdmin.vue';
+import mix from '../mixins/mix.js';
 export default {
+    mixins: [mix],
+    components: {
+        NavAdminVue,
+    },
     data() {
         return {
             officeinf: [],

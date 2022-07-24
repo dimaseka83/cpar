@@ -80,5 +80,8 @@ export default {
         sm(){
             return this.$vuetify.breakpoint.xs;
         },
+        users() {
+            return this.$store.state.user;
+        }
     }
 }

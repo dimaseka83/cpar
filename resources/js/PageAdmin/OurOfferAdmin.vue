@@ -402,7 +402,13 @@
     </v-app>
 </template>
 <script>
+import NavAdminVue from '../components/NavAdmin.vue';
+import mix from '../mixins/mix.js';
 export default {
+    mixins: [mix],
+    components: {
+        NavAdminVue,
+    },
     data() {
         return {
             offer: [],

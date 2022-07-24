@@ -2,22 +2,25 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Models\imagesSlides;
 use App\Models\news;
+use App\Models\User;
 use App\Models\page2;
 use App\Models\page3;
 use App\Models\page4;
 use App\Models\page5;
 use App\Models\page6;
 use App\Models\page7;
+use App\Models\slides;
 use App\Models\progress;
 use App\Models\services;
-use App\Models\slides;
 use App\Models\subpage3;
 use App\Models\subpage5;
 use App\Models\subpage6;
+use App\Models\imagesSlides;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
@@ -622,5 +625,38 @@ class HomeController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 500);
         }
+    }
+
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            $token = $user->createToken('MyApp')->accessToken;
+            return response()->json(['success' => true, 'token' => $token, 'user' => $user]);
+        } else {
+            return response()->json(['error' => 'Unauthorised', 'message' => 'Pastikan Email dan Password Benar'], 401);
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        $token = $request->user()->token();
+        $token->revoke();
+        return response()->json([
+            'message' => 'Successfully logged out'
+        ]);
+    }
+
+    public function changePassword(Request $request)
+    {
+        $user = User::find(1);
+        $user->update([
+            'password' => Hash::make($request->password),
+        ]);
+        return response()->json([
+            'success' => true,
+            'msg' => 'Password berhasil diubah',
+        ]);
     }
 }

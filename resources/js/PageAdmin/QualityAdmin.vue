@@ -1,33 +1,36 @@
 <template>
     <v-app>
-        <v-card class="my-16">
+        <NavAdminVue />
+        <div v-if="users == null">
+            <p class="my-16">Silahkan Login Terlebih Dahulu. <router-link :to="{ name: 'login' }">Klik disini untuk
+                    login
+                </router-link>
+            </p>
+        </div>
+        <v-card class="my-16" v-else>
             <v-data-table :headers="headerspartnerlogo" :items="partner_logo">
                 <template v-slot:item.image="data">
-                    <v-img
-                        :src="'/images/quality/partner_logo/'+data.item.image"
-                        :width="100"
-                        :height="100"
-                        class="mr-4"
-                    ></v-img>                    
+                    <v-img :src="'/images/quality/partner_logo/'+data.item.image" :width="100" :height="100"
+                        class="mr-4"></v-img>
                 </template>
                 <template v-slot:item.action="data">
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="editPartnerLogo(data.index)">
-                                 <v-icon>mdi-pencil</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Edit</span>
-                     </v-tooltip>
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="hapusPartnerLogo(data.index)">
-                                 <v-icon>mdi-delete</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Delete</span>
-                     </v-tooltip>
-                 </template>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editPartnerLogo(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapusPartnerLogo(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
                 <template v-slot:top>
                     <v-toolbar flat>
                         <v-toolbar-title>Partner Logo <span class="subtitle-2 text--disabled">(Gambar harus HD)</span>
@@ -40,11 +43,13 @@
                             <v-card>
                                 <v-card-title>Create Slide</v-card-title>
                                 <v-card-text>
-                                    <v-file-input accept="image/*" v-model="formpartnerlogo.image" label="Image"></v-file-input>
+                                    <v-file-input accept="image/*" v-model="formpartnerlogo.image" label="Image">
+                                    </v-file-input>
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogpartnerlogo = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogpartnerlogo = false; createPartnerLogo()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text
+                                        @click="dialogpartnerlogo = false; createPartnerLogo()">Create</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -52,24 +57,24 @@
                 </template>
             </v-data-table>
             <v-data-table :headers="headersoursocial" :items="our_social">
-            <template v-slot:item.action="data">
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="editOurSocial(data.index)">
-                                 <v-icon>mdi-pencil</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Edit</span>
-                     </v-tooltip>
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="hapusOurSocial(data.index)">
-                                 <v-icon>mdi-delete</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Delete</span>
-                     </v-tooltip>
-                 </template>
+                <template v-slot:item.action="data">
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editOurSocial(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapusOurSocial(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
                 <template v-slot:top>
                     <v-toolbar flat>
                         <v-toolbar-title>Our Social</v-toolbar-title>
@@ -86,7 +91,8 @@
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogoursocial = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogoursocial = false; createOurSocial()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text
+                                        @click="dialogoursocial = false; createOurSocial()">Create</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -94,27 +100,27 @@
                 </template>
             </v-data-table>
             <v-data-table :headers="headersourcertifications" :items="ourcertifications">
-                        <template v-slot:item.action="data">
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="editOurCertifications(data.index)">
-                                 <v-icon>mdi-pencil</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Edit</span>
-                     </v-tooltip>
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="hapusOurCertifications(data.index)">
-                                 <v-icon>mdi-delete</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Delete</span>
-                     </v-tooltip>
-                 </template>
+                <template v-slot:item.action="data">
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editOurCertifications(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapusOurCertifications(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
                 <template v-slot:top>
                     <v-toolbar flat>
-                        <v-toolbar-title>Our Certifications 
+                        <v-toolbar-title>Our Certifications
                         </v-toolbar-title>
                         <v-spacer></v-spacer>
                         <v-dialog v-model="dialogourcertifications" max-width="500px">
@@ -125,47 +131,48 @@
                                 <v-card-title>Create Slide</v-card-title>
                                 <v-card-text>
                                     <v-text-field label="Title" v-model="formourcertifications.title"></v-text-field>
-                                    <v-text-field label="Subtitle" v-model="formourcertifications.subtitle"></v-text-field>
+                                    <v-text-field label="Subtitle" v-model="formourcertifications.subtitle">
+                                    </v-text-field>
                                 </v-card-text>
                                 <v-card-actions>
-                                    <v-btn color="blue darken-1" text @click="dialogourcertifications = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogourcertifications = false; createOurCertifications()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogourcertifications = false">Close
+                                    </v-btn>
+                                    <v-btn color="blue darken-1" text
+                                        @click="dialogourcertifications = false; createOurCertifications()">Create
+                                    </v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
                     </v-toolbar>
                 </template>
             </v-data-table>
-<v-data-table :headers="headerscertificationlogo" :items="certification_logo">
+            <v-data-table :headers="headerscertificationlogo" :items="certification_logo">
                 <template v-slot:item.image="data">
-                    <v-img
-                        :src="'/images/quality/certification_logo/'+data.item.image"
-                        :width="100"
-                        :height="100"
-                        class="mr-4"
-                    ></v-img>                    
+                    <v-img :src="'/images/quality/certification_logo/'+data.item.image" :width="100" :height="100"
+                        class="mr-4"></v-img>
                 </template>
                 <template v-slot:item.action="data">
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="editCertificationLogo(data.index)">
-                                 <v-icon>mdi-pencil</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Edit</span>
-                     </v-tooltip>
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="hapusCertificationLogo(data.index)">
-                                 <v-icon>mdi-delete</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Delete</span>
-                     </v-tooltip>
-                 </template>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editCertificationLogo(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapusCertificationLogo(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
                 <template v-slot:top>
                     <v-toolbar flat>
-                        <v-toolbar-title>Certification Logo <span class="subtitle-2 text--disabled">(Gambar harus HD)</span>
+                        <v-toolbar-title>Certification Logo <span class="subtitle-2 text--disabled">(Gambar harus
+                                HD)</span>
                         </v-toolbar-title>
                         <v-spacer></v-spacer>
                         <v-dialog v-model="dialogcertificationlogo" max-width="500px">
@@ -175,36 +182,40 @@
                             <v-card>
                                 <v-card-title>Create Slide</v-card-title>
                                 <v-card-text>
-                                    <v-file-input accept="image/*" v-model="formcertificationlogo.image" label="Image"></v-file-input>
+                                    <v-file-input accept="image/*" v-model="formcertificationlogo.image" label="Image">
+                                    </v-file-input>
                                 </v-card-text>
                                 <v-card-actions>
-                                    <v-btn color="blue darken-1" text @click="dialogcertificationlogo = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogcertificationlogo = false; createCertificationLogo()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogcertificationlogo = false">Close
+                                    </v-btn>
+                                    <v-btn color="blue darken-1" text
+                                        @click="dialogcertificationlogo = false; createCertificationLogo()">Create
+                                    </v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
                     </v-toolbar>
                 </template>
-</v-data-table>
+            </v-data-table>
             <v-data-table :headers="headersstrictpage" :items="strictpage">
-                                                <template v-slot:item.action="data">
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="editStrictPage(data.index)">
-                                 <v-icon>mdi-pencil</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Edit</span>
-                     </v-tooltip>
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="hapusStrictPage(data.index)">
-                                 <v-icon>mdi-delete</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Delete</span>
-                     </v-tooltip>
-                 </template>
+                <template v-slot:item.action="data">
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editStrictPage(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapusStrictPage(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
                 <template v-slot:top>
                     <v-toolbar flat>
                         <v-toolbar-title>Strict Page
@@ -222,7 +233,8 @@
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogstrictpage = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogstrictpage = false; createStrictPage()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text
+                                        @click="dialogstrictpage = false; createStrictPage()">Create</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -231,32 +243,28 @@
 
             </v-data-table>
             <v-data-table :headers="headersstrictlogo" :items="strict_logo">
-                                    <template v-slot:item.image="data">
-                    <v-img
-                        :src="'/images/quality/strict_logo/'+data.item.image"
-                        :width="100"
-                        :height="100"
-                        class="mr-4"
-                    ></v-img>                    
+                <template v-slot:item.image="data">
+                    <v-img :src="'/images/quality/strict_logo/'+data.item.image" :width="100" :height="100"
+                        class="mr-4"></v-img>
                 </template>
-                                        <template v-slot:item.action="data">
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="editStrictLogo(data.index)">
-                                 <v-icon>mdi-pencil</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Edit</span>
-                     </v-tooltip>
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="hapusStrictLogo(data.index)">
-                                 <v-icon>mdi-delete</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Delete</span>
-                     </v-tooltip>
-                 </template>
+                <template v-slot:item.action="data">
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editStrictLogo(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapusStrictLogo(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
                 <template v-slot:top>
                     <v-toolbar flat>
                         <v-toolbar-title>Strict Logo
@@ -269,11 +277,13 @@
                             <v-card>
                                 <v-card-title>Create Slide</v-card-title>
                                 <v-card-text>
-                                    <v-file-input accept="image/*" v-model="formstrictlogo.image" label="Image"></v-file-input>
+                                    <v-file-input accept="image/*" v-model="formstrictlogo.image" label="Image">
+                                    </v-file-input>
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogstrictlogo = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogstrictlogo = false; createStrictLogo()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text
+                                        @click="dialogstrictlogo = false; createStrictLogo()">Create</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -281,32 +291,28 @@
                 </template>
             </v-data-table>
             <v-data-table :headers="headersqc" :items="headqc">
-            <template v-slot:item.image="data">
-                    <v-img
-                        :src="'/images/quality/headqc/'+data.item.image"
-                        :width="100"
-                        :height="100"
-                        class="mr-4"
-                    ></v-img>                    
+                <template v-slot:item.image="data">
+                    <v-img :src="'/images/quality/headqc/'+data.item.image" :width="100" :height="100" class="mr-4">
+                    </v-img>
                 </template>
-                                                        <template v-slot:item.action="data">
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="editqc(data.index)">
-                                 <v-icon>mdi-pencil</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Edit</span>
-                     </v-tooltip>
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="hapusqc(data.index)">
-                                 <v-icon>mdi-delete</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Delete</span>
-                     </v-tooltip>
-                 </template>
+                <template v-slot:item.action="data">
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editqc(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapusqc(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
                 <template v-slot:top>
                     <v-toolbar flat>
                         <v-toolbar-title>QC</v-toolbar-title>
@@ -324,7 +330,8 @@
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogqc = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogqc = false; createqc()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogqc = false; createqc()">Create
+                                    </v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -332,24 +339,24 @@
                 </template>
             </v-data-table>
             <v-data-table :headers="headersemail" :items="heademail">
-                                                            <template v-slot:item.action="data">
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="editEmail(data.index)">
-                                 <v-icon>mdi-pencil</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Edit</span>
-                     </v-tooltip>
-                     <v-tooltip bottom>
-                         <template v-slot:activator="{ on }">
-                             <v-btn icon v-on="on" @click="hapusEmail(data.index)">
-                                 <v-icon>mdi-delete</v-icon>
-                             </v-btn>
-                         </template>
-                         <span>Delete</span>
-                     </v-tooltip>
-                 </template>
+                <template v-slot:item.action="data">
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="editEmail(data.index)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Edit</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on" @click="hapusEmail(data.index)">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Delete</span>
+                    </v-tooltip>
+                </template>
                 <template v-slot:top>
                     <v-toolbar flat>
                         <v-toolbar-title>Strict Page
@@ -367,7 +374,8 @@
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn color="blue darken-1" text @click="dialogemail = false">Close</v-btn>
-                                    <v-btn color="blue darken-1" text @click="dialogemail = false; createEmail()">Create</v-btn>
+                                    <v-btn color="blue darken-1" text @click="dialogemail = false; createEmail()">Create
+                                    </v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -378,7 +386,13 @@
     </v-app>
 </template>
 <script>
+import NavAdminVue from '../components/NavAdmin.vue';
+import mix from '../mixins/mix.js';
 export default {
+    mixins: [mix],
+    components: {
+        NavAdminVue,
+    },
     data() {
         return {
             partner_logo: [],

@@ -3,21 +3,21 @@ export default {
         user: null
     },
     mutations: {
-        setDatauser(state, data){
-            state.user = data
+        setDataUser(state, data) {
+            state.user = data;
         }
     },
-    actions: {
-        setDatauser(context, data){
+    actions:{
+        setDataUser(context, data) {
             context.commit('setDataUser', data);
-            sessionStorage.setItem('user', JSON.stringify(data));
+            localStorage.setItem('user', JSON.stringify(data));
         },
-        logout(context){
+        logout(context) {
             context.commit('setDataUser', null);
-            sessionStorage.removeItem('user');
+            localStorage.removeItem('user');
         },
         loadStoredState(context){
-            const user = sessionStorage.getItem('user');
+            let user = localStorage.getItem('user');
             if(user){
                 context.commit('setDataUser', JSON.parse(user));
             }
