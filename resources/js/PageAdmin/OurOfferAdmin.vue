@@ -1,6 +1,13 @@
 <template>
     <v-app>
-        <v-card class="my-16">
+        <NavAdminVue />
+        <div v-if="users == null">
+            <p class="my-16">Silahkan Login Terlebih Dahulu. <router-link :to="{ name: 'login' }">Klik disini untuk
+                    login
+                </router-link>
+            </p>
+        </div>
+        <v-card class="my-16" v-else>
             <v-data-table :headers="headeroffer" :items="offer">
                         <template v-slot:item.action="data">
                      <v-tooltip bottom>
