@@ -81,8 +81,7 @@
                              <v-card>
                                  <v-card-title>Create Slide</v-card-title>
                                  <v-card-text>
-                                     <v-text-field label="Mission Id" v-model="formmissioncontent.mission_id">
-                                     </v-text-field>
+                                     <v-select :items="mission" v-model="formmissioncontent.mission_id" item-value="id" item-text="title" label="Mission"></v-select>
                                      <v-text-field label="Text" v-model="formmissioncontent.text"></v-text-field>
                                  </v-card-text>
                                  <v-card-actions>

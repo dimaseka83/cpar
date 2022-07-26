@@ -88,8 +88,7 @@
                                     </v-text-field>
                                     <v-text-field v-model="formProducts.desc_prod" label="Description" required>
                                     </v-text-field>
-                                    <v-text-field v-model="formProducts.category_id" label="Category Id" required>
-                                    </v-text-field>
+                                     <v-select :items="categorySelect" v-model="formProducts.category_id" item-value="id" item-text="name_cat" label="Category"></v-select>
                                     <v-file-input accept="image/*" v-model="formProducts.img_prod" label="Image">
                                     </v-file-input>
                                 </v-card-text>
@@ -214,6 +213,21 @@ export default {
     },
     mounted() {
         this.loadData();
+    },
+    computed: {
+        categorySelect() {
+            if(this.category.length > 0){
+                let category = [];
+                this.category.forEach(item => {
+                    category.push({
+                        id: item.id,
+                        name_cat: item.name_cat,
+                    })
+                });
+                category.shift();
+                return category;
+            }
+        },
     },
 }
 </script>
