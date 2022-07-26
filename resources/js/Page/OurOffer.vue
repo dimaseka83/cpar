@@ -92,7 +92,7 @@
                 </v-row>
                 <v-img class="mt-16" src="https://agriwell.com/wp-content/uploads/2020/01/organic-cyrcle.png"></v-img>
                 <div class="d-flex justify-center">
-                    <v-btn x-large color="green" dark>get in touch</v-btn>
+                    <v-btn @click="menuklik('/contacts')" x-large color="green" dark>get in touch</v-btn>
                 </div>
             </v-container>
         </v-content>

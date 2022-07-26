@@ -58,6 +58,12 @@ export default {
             await axios.get('/api/company/detailFooter').then(response => {
                 this.footer = response.data;
             })
+        },
+        menuklik(link) {
+            this.drawer = false
+            this.$router.push({
+                path: link
+            })
         }
     },
 

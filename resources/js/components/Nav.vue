@@ -37,12 +37,7 @@ export default {
         }
     },
     methods: {
-        menuklik(link) {
-            this.drawer = false
-            this.$router.push({
-                path: link
-            })
-        }
+
     },
 }
 </script>

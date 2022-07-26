@@ -23,9 +23,9 @@
                                         {{ p.subtitle }}
                                     </p>
                                     <div class="d-flex justify-end" v-if="i % 2 == 1">
-                                        <v-btn color="white" x-large class="text-uppercase">learn more</v-btn>
+                                        <v-btn color="white" x-large class="text-uppercase" @click="menuklik('/our-offer')">learn more</v-btn>
                                     </div>
-                                    <v-btn color="white" x-large class="text-uppercase" v-if="i % 2 == 0">learn more
+                                    <v-btn @click="menuklik('/our-offer')" color="white" x-large class="text-uppercase" v-if="i % 2 == 0">learn more
                                     </v-btn>
                                 </v-col>
                             </v-row>
@@ -40,7 +40,7 @@
                                         {{ p.subtitle }}
                                     </p>
                                     <div class="d-flex justify-center">
-                                        <v-btn color="white" large class="text-uppercase">learn more</v-btn>
+                                        <v-btn @click="menuklik('/our-offer')" color="white" large class="text-uppercase">learn more</v-btn>
                                     </div>
                                 </v-col>
                             </v-row>
@@ -79,7 +79,7 @@
                     <div v-for="(pg2, i) in page2" :key="'pg2_1'+i">
                         <p class="font-weight-bold text-h3 white--text">{{ pg2.title }}</p>
                         <p class="font-weight-light title white--text">{{ pg2.subtitle }}</p>
-                        <a class="text-decoration-underline white--text" href="#">
+                        <a class="text-decoration-underline white--text" @click="menuklik('/about')">
                             Read More <v-icon dark>mdi-arrow-right</v-icon>
                         </a>
                     </div>
@@ -111,7 +111,7 @@
                                         {{ sub.subtitle }}</p>
                                 </v-col>
                             </v-row>
-                            <v-btn x-large color="green" class="mt-16" dark>learn more</v-btn>
+                            <v-btn @click="menuklik('/our-offer')" x-large color="green" class="mt-16" dark>learn more</v-btn>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -247,10 +247,10 @@
                                 <p class="font-weight-black text-h4 mt-5">{{ latest.title }}</p>
                                 <p class="font-weight-thin title">{{ latest.date }} | {{ latest.category_news }}</p>
                                 <p class="subtitle">{{ latest.subtitle }}</p>
-                                <a class="text-decoration-underline font-weight-bold text-uppercase green--text"
+                                <!-- <a class="text-decoration-underline font-weight-bold text-uppercase green--text"
                                     href="#">
                                     Read More <v-icon color="green">mdi-arrow-right</v-icon>
-                                </a>
+                                </a> -->
                             </div>
                         </v-col>
                         <v-col cols="8">
@@ -263,10 +263,10 @@
                                         <p class="font-weight-black text-h4 mt-5">{{ disp.title }}</p>
                                         <p class="font-weight-thin title">{{ disp.date }} | {{ disp.category_news }}</p>
                                         <p class="subtitle">{{ disp.subtitle }}</p>
-                                        <a class="text-decoration-underline font-weight-bold text-uppercase green--text"
+                                        <!-- <a class="text-decoration-underline font-weight-bold text-uppercase green--text"
                                             href="#">
                                             Read More <v-icon color="green">mdi-arrow-right</v-icon>
-                                        </a>
+                                        </a> -->
                                     </div>
                                 </v-col>
                             </v-row>

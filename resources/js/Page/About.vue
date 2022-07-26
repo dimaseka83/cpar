@@ -122,7 +122,7 @@
                                 </div>
                             </v-col>     
                         </v-row>
-                        <v-btn x-large class="success mt-16">explore more</v-btn>
+                        <v-btn @click="menuklik('/our-products')" x-large class="success mt-16">explore more</v-btn>
                     </v-col>
                     <v-col>
                         <v-img src="https://agriwell.com/wp-content/uploads/2019/05/about-hand.png" :height="height"></v-img>
@@ -146,7 +146,7 @@
                     </v-col>
                 </v-row>
                 <div class="d-flex justify-center">
-                    <v-btn x-large class="success mt-16">explore more</v-btn>
+                    <v-btn @click="menuklik('/our-offer')" x-large class="success mt-16">explore more</v-btn>
                 </div>
             </v-container>
         </v-content>
